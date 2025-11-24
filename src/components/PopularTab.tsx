@@ -153,7 +153,7 @@ export default function PopularTours() {
                                     </div>
 
                                     {/* Title */}
-                                    <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 group-hover:text-amber-600 transition-colors line-clamp-2 leading-tight mb-3">
+                                    <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 group-hover:text-amber-600 transition-colors line-clamp-1 leading-tight mb-3">
                                         {tour.title}
                                     </h3>
 
