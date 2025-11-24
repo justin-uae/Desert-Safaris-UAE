@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { ArrowRight, Calendar, Users, Loader, Trash2, Plus, Minus, User, UserX } from 'lucide-react';
+import { ArrowRight, Calendar, Users, Loader, Trash2, Plus, Minus, User, UserX, ShoppingBag, Sparkles, CheckCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { createOrder } from '../slices/checkoutSlice';
@@ -190,39 +190,44 @@ export const CartPageComplete: React.FC = () => {
     // Success/Loading State
     if (submitted && checkoutSuccess) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-white flex items-center justify-center p-6">
+            <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-white flex items-center justify-center p-6">
                 <div className="text-center max-w-md">
                     <div className="mb-8 inline-block">
-                        <Loader className="w-20 h-20 text-blue-600 animate-spin" />
+                        <div className="relative">
+                            <div className="w-24 h-24 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center animate-pulse">
+                                <Loader className="w-12 h-12 text-white animate-spin" />
+                            </div>
+                            <div className="absolute inset-0 bg-amber-400 rounded-full blur-xl opacity-50 animate-pulse"></div>
+                        </div>
                     </div>
-                    <h1 className="text-4xl font-bold text-gray-800 mb-2">Booking Details Preparing</h1>
-                    <p className="text-lg text-gray-600 mb-8">Preparing your secure checkout...</p>
+                    <h1 className="text-4xl font-black text-gray-900 mb-3">Safari Booking Confirmed!</h1>
+                    <p className="text-lg text-gray-600 mb-8 font-medium">Preparing your secure checkout...</p>
 
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
-                        <div className="flex items-start gap-3">
-                            <div className="text-2xl">🔒</div>
+                    <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-2xl p-6 mb-8 shadow-lg">
+                        <div className="flex items-start gap-4">
+                            <div className="text-3xl">🔒</div>
                             <div className="text-left">
-                                <p className="font-semibold text-gray-800 text-sm mb-1">Secure Checkout</p>
-                                <p className="text-gray-600 text-xs leading-relaxed">
-                                    Your booking details are ready. You will now proceed to our secure payment page.
+                                <p className="font-bold text-gray-900 text-base mb-2">Secure Payment Gateway</p>
+                                <p className="text-gray-700 text-sm leading-relaxed">
+                                    Your desert adventure booking is ready. Redirecting to our secure payment portal now.
                                 </p>
                             </div>
                         </div>
                     </div>
 
                     <div className="mb-8">
-                        <p className="text-gray-600 font-semibold mb-3">Redirecting to Payment</p>
+                        <p className="text-gray-700 font-bold mb-4">Redirecting to Payment</p>
                         <div className="flex gap-2 justify-center">
-                            <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
-                            <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse delay-100"></div>
-                            <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse delay-200"></div>
+                            <div className="w-3 h-3 bg-amber-500 rounded-full animate-pulse"></div>
+                            <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse delay-100"></div>
+                            <div className="w-3 h-3 bg-amber-500 rounded-full animate-pulse delay-200"></div>
                         </div>
                     </div>
 
                     <div className="space-y-2">
-                        <p className="text-sm font-medium text-gray-800">Next Step: Complete Payment</p>
-                        <p className="text-xs text-gray-500 leading-relaxed">
-                            Please do not close this page. You will be redirected to our secure payment gateway shortly.
+                        <p className="text-base font-bold text-gray-900">Next: Complete Your Payment</p>
+                        <p className="text-sm text-gray-600 leading-relaxed">
+                            Please keep this page open. You'll be redirected automatically.
                         </p>
                     </div>
                 </div>
@@ -233,18 +238,19 @@ export const CartPageComplete: React.FC = () => {
     // Empty cart state
     if (items.length === 0) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center text-center p-6">
+            <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-white flex items-center justify-center text-center p-6">
                 <div>
-                    <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
-                        <span className="text-5xl">🛍️</span>
+                    <div className="w-28 h-28 bg-gradient-to-br from-amber-100 to-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl border-4 border-amber-200">
+                        <ShoppingBag className="w-14 h-14 text-amber-600" />
                     </div>
-                    <h1 className="text-3xl font-bold text-gray-800 mb-2">Your Cart is Empty</h1>
-                    <p className="text-gray-500 mb-6">Add your favorite experiences to start exploring!</p>
+                    <h1 className="text-4xl font-black text-gray-900 mb-3">Your Cart is Empty</h1>
+                    <p className="text-gray-600 mb-8 text-lg font-medium">Start your desert adventure by browsing our safaris!</p>
                     <Link
-                        className="inline-block bg-blue-600 text-white font-semibold px-8 py-3 rounded-full hover:bg-blue-700 transition-all shadow-md"
+                        className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 text-white font-bold px-8 py-4 rounded-full transition-all shadow-xl hover:shadow-2xl transform hover:scale-105"
                         to={"/excursions"}
                     >
-                        Browse Excursions
+                        <span>Explore Desert Safaris</span>
+                        <ArrowRight className="w-5 h-5" />
                     </Link>
                 </div>
             </div>
@@ -254,30 +260,38 @@ export const CartPageComplete: React.FC = () => {
     // CART VIEW
     if (currentStep === 'cart') {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-white py-12 px-4">
+            <div className="min-h-screen bg-gradient-to-b from-white via-amber-50/20 to-white py-12 px-4">
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-12">
-                        <h1 className="text-4xl font-bold text-gray-800 mb-2">Your Shopping Cart</h1>
-                        <p className="text-gray-600 text-lg">{items.length} item{items.length !== 1 ? 's' : ''} in your cart</p>
+                        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-100 to-orange-100 px-4 py-2 rounded-full mb-4 border border-amber-200">
+                            <ShoppingBag className="w-4 h-4 text-amber-600" />
+                            <span className="text-amber-700 text-sm font-bold uppercase tracking-wider">Shopping Cart</span>
+                        </div>
+                        <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-3">Your Safari Adventures</h1>
+                        <p className="text-gray-600 text-lg font-medium">
+                            {items.length} {items.length !== 1 ? 'experiences' : 'experience'} selected
+                        </p>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <div className="lg:col-span-2 space-y-4">
                             {items.map((item) => (
                                 <div
                                     key={item.variantId}
-                                    className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-shadow"
+                                    className="bg-white rounded-2xl p-6 shadow-lg border-2 border-amber-100 hover:shadow-xl transition-all"
                                 >
-                                    <div className="flex flex-col justify-center items-center sm:flex-row gap-6">
-                                        <div className="w-full sm:w-32 h-32 flex items-center rounded-lg">
-                                            <img src={item?.image} alt={`Thumbnail`} className="w-full h-full object-contain" />
+                                    <div className="flex flex-col sm:flex-row gap-6">
+                                        <div className="w-full sm:w-32 h-32 flex items-center rounded-xl overflow-hidden bg-gradient-to-br from-amber-100 to-orange-100">
+                                            <img src={item?.image} alt={item.title} className="w-full h-full object-cover" />
                                         </div>
 
                                         <div className="flex-1">
                                             <div className="flex justify-between items-start mb-3">
                                                 <div>
-                                                    <h3 className="text-xl font-semibold text-gray-800 mb-2">{item.title}</h3>
-                                                    <p className="text-blue-600 font-bold text-lg">{formatPrice(item.price)}</p>
+                                                    <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                                                    <p className="text-xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
+                                                        {formatPrice(item.price)}
+                                                    </p>
                                                 </div>
                                                 <button
                                                     onClick={() => handleRemoveItem(item.variantId)}
@@ -289,11 +303,11 @@ export const CartPageComplete: React.FC = () => {
                                             </div>
 
                                             {item.customAttributes && (
-                                                <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-3 mb-4 text-sm text-gray-600 space-y-1">
+                                                <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-3 mb-4 text-sm text-gray-700 space-y-2 border border-amber-200">
                                                     {item.customAttributes.date && (
                                                         <div className="flex items-center gap-2">
-                                                            <Calendar className="w-4 h-4 text-blue-400" />
-                                                            <span>
+                                                            <Calendar className="w-4 h-4 text-amber-600" />
+                                                            <span className="font-semibold">
                                                                 {new Date(item.customAttributes.date).toLocaleDateString('en-US', {
                                                                     weekday: 'short',
                                                                     month: 'short',
@@ -304,15 +318,15 @@ export const CartPageComplete: React.FC = () => {
                                                     )}
                                                     {item.customAttributes.totalGuests && (
                                                         <div className="flex items-center gap-2">
-                                                            <Users className="w-4 h-4 text-purple-400" />
-                                                            <span>
+                                                            <Users className="w-4 h-4 text-amber-600" />
+                                                            <span className="font-semibold">
                                                                 {item.customAttributes.totalGuests}{' '}
                                                                 {item.customAttributes.totalGuests === '1' ? 'guest' : 'guests'}
                                                             </span>
                                                         </div>
                                                     )}
                                                     {item.customAttributes.adults && (
-                                                        <div className="text-gray-600">
+                                                        <div className="text-gray-700 font-medium">
                                                             👥 {item.customAttributes.adults} adults
                                                             {item.customAttributes.children && `, ${item.customAttributes.children} children`}
                                                         </div>
@@ -320,28 +334,28 @@ export const CartPageComplete: React.FC = () => {
                                                 </div>
                                             )}
 
-                                            <div className="flex items-center gap-4">
-                                                <span className="text-gray-600 text-sm">Quantity:</span>
-                                                <div className="flex items-center border border-gray-300 rounded-lg">
+                                            <div className="flex items-center gap-4 flex-wrap">
+                                                <span className="text-gray-700 text-sm font-semibold">Quantity:</span>
+                                                <div className="flex items-center border-2 border-amber-200 rounded-xl overflow-hidden">
                                                     <button
                                                         onClick={() => handleQuantityChange(item.variantId, item.quantity - 1)}
-                                                        className="p-2 hover:bg-gray-100 transition-colors"
+                                                        className="p-2 hover:bg-amber-50 transition-colors"
                                                     >
-                                                        <Minus className="w-4 h-4 text-gray-600" />
+                                                        <Minus className="w-4 h-4 text-amber-600" />
                                                     </button>
-                                                    <span className="px-4 py-2 font-semibold text-gray-800 min-w-[3rem] text-center">
+                                                    <span className="px-4 py-2 font-bold text-gray-900 min-w-[3rem] text-center">
                                                         {item.quantity}
                                                     </span>
                                                     <button
                                                         onClick={() => handleQuantityChange(item.variantId, item.quantity + 1)}
-                                                        className="p-2 hover:bg-gray-100 transition-colors"
+                                                        className="p-2 hover:bg-amber-50 transition-colors"
                                                     >
-                                                        <Plus className="w-4 h-4 text-gray-600" />
+                                                        <Plus className="w-4 h-4 text-amber-600" />
                                                     </button>
                                                 </div>
                                                 <span className="ml-auto text-right">
-                                                    <p className="text-gray-600 text-sm">Subtotal</p>
-                                                    <p className="text-xl font-bold text-blue-600">
+                                                    <p className="text-gray-600 text-sm font-medium">Subtotal</p>
+                                                    <p className="text-xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
                                                         {formatPrice(item.price * item.quantity)}
                                                     </p>
                                                 </span>
@@ -353,33 +367,33 @@ export const CartPageComplete: React.FC = () => {
 
                             <Link
                                 to="/excursions"
-                                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold mt-6"
+                                className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-bold mt-6 transition-colors"
                             >
                                 ← Continue Shopping
                             </Link>
                         </div>
 
                         <div className="lg:col-span-1">
-                            <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100 sticky top-6">
-                                <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">Order Summary</h3>
+                            <div className="bg-white rounded-2xl shadow-2xl p-6 border-2 border-amber-200 sticky top-6">
+                                <h3 className="text-2xl font-black text-gray-900 mb-6 text-center">Order Summary</h3>
 
-                                <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 space-y-3 border border-gray-200 mb-6">
-                                    <div className="flex justify-between text-gray-600">
+                                <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 space-y-3 border-2 border-amber-200 mb-6">
+                                    <div className="flex justify-between text-gray-700 font-medium">
                                         <span>Subtotal</span>
                                         <span>{selectedCurrency?.symbol}{totalPrice.toFixed(2)}</span>
                                     </div>
-                                    <div className="flex justify-between text-gray-600">
+                                    <div className="flex justify-between text-gray-700 font-medium">
                                         <span>VAT (5%)</span>
                                         <span>{selectedCurrency?.symbol}{tax.toFixed(2)}</span>
                                     </div>
-                                    <div className="border-t border-gray-300 pt-3 flex justify-between items-center">
-                                        <span className="text-lg font-bold text-gray-800">Total</span>
-                                        <span className="text-2xl font-extrabold text-blue-600">
+                                    <div className="border-t-2 border-amber-300 pt-3 flex justify-between items-center">
+                                        <span className="text-lg font-black text-gray-900">Total</span>
+                                        <span className="text-2xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
                                             {selectedCurrency?.symbol}{finalTotal.toFixed(2)}
                                         </span>
                                     </div>
                                     {selectedCurrency.code !== 'AED' && (
-                                        <div className="text-xs text-gray-500 text-center pt-2 border-t border-gray-200">
+                                        <div className="text-xs text-gray-600 text-center pt-2 border-t border-amber-200 font-medium">
                                             ≈ AED {finalTotalAED.toFixed(2)} at checkout
                                         </div>
                                     )}
@@ -387,16 +401,16 @@ export const CartPageComplete: React.FC = () => {
 
                                 <button
                                     onClick={handleCheckoutClick}
-                                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center gap-3 text-lg"
+                                    className="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 text-white font-bold py-4 rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3 text-lg"
                                 >
                                     Proceed to Checkout <ArrowRight className="w-5 h-5" />
                                 </button>
 
                                 {/* Guest Checkout Badge */}
-                                <div className="mt-4 text-center">
-                                    <div className="inline-flex items-center gap-2 text-sm text-gray-600 bg-green-50 px-4 py-2 rounded-full border border-green-200">
-                                        <UserX className="w-4 h-4 text-green-600" />
-                                        <span>Guest checkout available</span>
+                                <div className="mt-5 text-center">
+                                    <div className="inline-flex items-center gap-2 text-sm text-gray-700 bg-green-50 px-4 py-2 rounded-full border-2 border-green-200 font-semibold">
+                                        <CheckCircle className="w-4 h-4 text-green-600" />
+                                        <span>Quick guest checkout available</span>
                                     </div>
                                 </div>
                             </div>
@@ -409,50 +423,59 @@ export const CartPageComplete: React.FC = () => {
 
     // CHECKOUT VIEW
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-white py-12 px-4">
+        <div className="min-h-screen bg-gradient-to-b from-white via-amber-50/20 to-white py-12 px-4">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-12">
                     <button
                         onClick={handleBackToCart}
-                        className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold mb-6"
+                        className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-bold mb-6 transition-colors"
                     >
                         ← Back to Cart
                     </button>
-                    <h1 className="text-4xl font-bold text-gray-800 mb-2">Complete Your Booking</h1>
-                    <p className="text-gray-600 text-lg">Just a few details away from your adventure</p>
+                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-100 to-orange-100 px-4 py-2 rounded-full mb-4 border border-amber-200">
+                        <Sparkles className="w-4 h-4 text-amber-600" />
+                        <span className="text-amber-700 text-sm font-bold uppercase tracking-wider">Checkout</span>
+                    </div>
+                    <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-3">Complete Your Booking</h1>
+                    <p className="text-gray-600 text-lg font-medium">Your desert adventure awaits!</p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2">
                         <form
                             onSubmit={handleCheckoutSubmit}
-                            className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100"
+                            className="bg-white rounded-3xl p-8 shadow-2xl border-2 border-amber-200"
                         >
                             {/* Checkout Type Selection */}
                             <div className="mb-8">
-                                <h2 className="text-xl font-bold text-gray-800 mb-4">Choose Checkout Method</h2>
+                                <h2 className="text-xl font-black text-gray-900 mb-4">Choose Checkout Method</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {/* Guest Checkout Option */}
                                     <button
                                         type="button"
                                         onClick={() => handleCheckoutTypeChange('guest')}
-                                        className={`p-4 rounded-xl border-2 transition-all text-left ${checkoutType === 'guest'
-                                            ? 'border-blue-500 bg-blue-50'
-                                            : 'border-gray-200 hover:border-gray-300'
+                                        className={`p-5 rounded-2xl border-2 transition-all text-left ${checkoutType === 'guest'
+                                                ? 'border-amber-500 bg-gradient-to-br from-amber-50 to-orange-50 shadow-lg'
+                                                : 'border-amber-200 hover:border-amber-300'
                                             }`}
                                     >
                                         <div className="flex items-center gap-3 mb-2">
-                                            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${checkoutType === 'guest' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'
+                                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${checkoutType === 'guest'
+                                                    ? 'bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md'
+                                                    : 'bg-gray-100 text-gray-600'
                                                 }`}>
-                                                <UserX className="w-5 h-5" />
+                                                <UserX className="w-6 h-6" />
                                             </div>
                                             <div>
-                                                <h3 className="font-semibold text-gray-800">Guest Checkout</h3>
-                                                <p className="text-xs text-gray-500">No account required</p>
+                                                <h3 className="font-bold text-gray-900">Guest Checkout</h3>
+                                                <p className="text-xs text-gray-600 font-medium">Quick & easy</p>
                                             </div>
                                         </div>
                                         {checkoutType === 'guest' && (
-                                            <div className="text-xs text-blue-600 font-medium">✓ Selected</div>
+                                            <div className="text-xs text-amber-700 font-bold mt-2 flex items-center gap-1">
+                                                <CheckCircle className="w-3 h-3" />
+                                                Selected
+                                            </div>
                                         )}
                                     </button>
 
@@ -460,82 +483,88 @@ export const CartPageComplete: React.FC = () => {
                                     <button
                                         type="button"
                                         onClick={() => handleCheckoutTypeChange('account')}
-                                        className={`p-4 rounded-xl border-2 transition-all text-left ${checkoutType === 'account'
-                                            ? 'border-purple-500 bg-purple-50'
-                                            : 'border-gray-200 hover:border-gray-300'
+                                        className={`p-5 rounded-2xl border-2 transition-all text-left ${checkoutType === 'account'
+                                                ? 'border-amber-500 bg-gradient-to-br from-amber-50 to-orange-50 shadow-lg'
+                                                : 'border-amber-200 hover:border-amber-300'
                                             }`}
                                     >
                                         <div className="flex items-center gap-3 mb-2">
-                                            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${checkoutType === 'account' ? 'bg-purple-500 text-white' : 'bg-gray-100 text-gray-600'
+                                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${checkoutType === 'account'
+                                                    ? 'bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md'
+                                                    : 'bg-gray-100 text-gray-600'
                                                 }`}>
-                                                <User className="w-5 h-5" />
+                                                <User className="w-6 h-6" />
                                             </div>
                                             <div>
-                                                <h3 className="font-semibold text-gray-800">
+                                                <h3 className="font-bold text-gray-900">
                                                     {isAuthenticated ? 'Use My Account' : 'Sign In'}
                                                 </h3>
-                                                <p className="text-xs text-gray-500">
-                                                    {isAuthenticated ? 'Faster checkout' : 'Sign in to your account'}
+                                                <p className="text-xs text-gray-600 font-medium">
+                                                    {isAuthenticated ? 'Faster checkout' : 'Track your bookings'}
                                                 </p>
                                             </div>
                                         </div>
                                         {checkoutType === 'account' && isAuthenticated && (
-                                            <div className="text-xs text-purple-600 font-medium">✓ Logged in as {user?.email}</div>
+                                            <div className="text-xs text-amber-700 font-bold mt-2 flex items-center gap-1">
+                                                <CheckCircle className="w-3 h-3" />
+                                                {user?.email}
+                                            </div>
                                         )}
                                         {!isAuthenticated && (
-                                            <div className="text-xs text-gray-500">Click to sign in →</div>
+                                            <div className="text-xs text-gray-600 font-medium mt-2">Click to sign in →</div>
                                         )}
                                     </button>
                                 </div>
                             </div>
 
-                            <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
-                                🧾 {checkoutType === 'guest' ? 'Guest Details' : 'Your Details'}
+                            <h2 className="text-2xl font-black text-gray-900 mb-6 flex items-center gap-3">
+                                <span className="w-2 h-8 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
+                                {checkoutType === 'guest' ? 'Guest Details' : 'Your Details'}
                             </h2>
 
                             {errorMessage && (
-                                <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
-                                    <p className="text-red-700 text-sm font-semibold">❌ {errorMessage}</p>
+                                <div className="mb-6 bg-red-50 border-2 border-red-200 rounded-xl p-4">
+                                    <p className="text-red-700 text-sm font-bold">❌ {errorMessage}</p>
                                 </div>
                             )}
 
-                            <div className="space-y-6">
+                            <div className="space-y-5">
                                 <div>
-                                    <label className="block text-gray-700 text-sm mb-2">Full Name *</label>
+                                    <label className="block text-gray-800 text-sm font-bold mb-2">Full Name *</label>
                                     <input
                                         type="text"
                                         name="name"
                                         value={formData.name}
                                         onChange={handleInputChange}
                                         placeholder="John Doe"
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                        className="w-full px-4 py-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 focus:outline-none transition-all font-medium"
                                         required
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="block text-gray-700 text-sm mb-2">Email *</label>
+                                    <label className="block text-gray-800 text-sm font-bold mb-2">Email *</label>
                                     <input
                                         type="email"
                                         name="email"
                                         value={formData.email}
                                         onChange={handleInputChange}
                                         placeholder="your@email.com"
-                                        className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none ${checkoutType === 'account' && user?.email ? 'bg-gray-50' : ''
+                                        className={`w-full px-4 py-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 focus:outline-none transition-all font-medium ${checkoutType === 'account' && user?.email ? 'bg-amber-50' : ''
                                             }`}
                                         required
                                         readOnly={checkoutType === 'account' && !!user?.email}
                                     />
                                     {checkoutType === 'account' && user?.email && (
-                                        <p className="text-gray-500 text-xs mt-1">Using your account email</p>
+                                        <p className="text-amber-600 text-xs mt-1 font-medium">Using your account email</p>
                                     )}
                                     {checkoutType === 'guest' && (
-                                        <p className="text-gray-500 text-xs mt-1">Confirmation will be sent to this email</p>
+                                        <p className="text-gray-600 text-xs mt-1 font-medium">Confirmation will be sent here</p>
                                     )}
                                 </div>
 
                                 <div>
-                                    <label className="block text-gray-700 text-sm mb-2">Phone *</label>
+                                    <label className="block text-gray-800 text-sm font-bold mb-2">Phone *</label>
                                     <input
                                         type="tel"
                                         name="phone"
@@ -544,40 +573,54 @@ export const CartPageComplete: React.FC = () => {
                                         placeholder="+971 50 123 4567"
                                         pattern="^\+971[0-9]{9}$"
                                         title="Please enter a valid UAE phone number (9 digits after +971)"
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                        className="w-full px-4 py-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 focus:outline-none transition-all font-medium"
                                         required
                                     />
-                                    <p className="text-gray-500 text-xs mt-1">Enter 9 digits after +971</p>
+                                    <p className="text-gray-600 text-xs mt-1 font-medium">Enter 9 digits after +971</p>
                                 </div>
                             </div>
 
                             {/* Guest Checkout Benefits */}
                             {checkoutType === 'guest' && (
-                                <div className="mt-6 bg-green-50 rounded-2xl border border-green-200 p-4">
-                                    <h3 className="text-sm font-semibold text-green-800 mb-2">✓ Guest Checkout Benefits</h3>
-                                    <ul className="text-gray-600 text-xs space-y-1">
-                                        <li>• No account creation required</li>
-                                        <li>• Quick and easy booking</li>
-                                        <li>• Confirmation sent to your email</li>
-                                        <li>• Same secure payment process</li>
+                                <div className="mt-6 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl border-2 border-green-200 p-5">
+                                    <h3 className="text-sm font-black text-green-800 mb-3 flex items-center gap-2">
+                                        <CheckCircle className="w-5 h-5" />
+                                        Guest Checkout Benefits
+                                    </h3>
+                                    <ul className="text-gray-700 text-sm space-y-2 font-medium">
+                                        <li className="flex items-center gap-2">✓ No account creation needed</li>
+                                        <li className="flex items-center gap-2">✓ Quick booking process</li>
+                                        <li className="flex items-center gap-2">✓ Email confirmation sent</li>
+                                        <li className="flex items-center gap-2">✓ Same secure payment</li>
                                     </ul>
                                 </div>
                             )}
 
                             {/* Payment Info */}
-                            <div className="mt-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl border border-blue-100 p-6">
-                                <h3 className="text-lg font-semibold text-blue-700 mb-2">💳 Payment</h3>
-                                <p className="text-gray-600 text-sm leading-relaxed">
-                                    ✓ Secure payment processing<br />
-                                    ✓ You will be redirected to our checkout page<br />
-                                    ✓ Confirmation will be sent to your email
-                                </p>
+                            <div className="mt-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border-2 border-amber-200 p-6">
+                                <h3 className="text-lg font-black text-amber-700 mb-3 flex items-center gap-2">
+                                    💳 Secure Payment
+                                </h3>
+                                <ul className="text-gray-700 text-sm space-y-2 font-medium leading-relaxed">
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                                        100% secure payment processing
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                                        Redirected to secure checkout
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                                        Instant email confirmation
+                                    </li>
+                                </ul>
                             </div>
 
                             <button
                                 type="submit"
                                 disabled={checkoutLoading}
-                                className="w-full mt-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center gap-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                                className="w-full mt-8 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 text-white font-bold py-4 rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                             >
                                 {checkoutLoading ? (
                                     <>
@@ -594,9 +637,9 @@ export const CartPageComplete: React.FC = () => {
                             {/* Create Account Prompt for Guests */}
                             {checkoutType === 'guest' && !isAuthenticated && (
                                 <div className="mt-4 text-center">
-                                    <p className="text-gray-600 text-sm">
+                                    <p className="text-gray-700 text-sm font-medium">
                                         Want to track your bookings?{' '}
-                                        <Link to="/register" className="text-blue-600 hover:text-blue-700 font-semibold">
+                                        <Link to="/register" className="text-amber-600 hover:text-amber-700 font-bold">
                                             Create an account
                                         </Link>
                                     </p>
@@ -607,30 +650,30 @@ export const CartPageComplete: React.FC = () => {
 
                     {/* Sidebar */}
                     <div className="lg:col-span-1">
-                        <div className="bg-white rounded-3xl shadow-xl p-6 border border-gray-100 sticky top-6">
-                            <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">Order Summary</h3>
+                        <div className="bg-white rounded-3xl shadow-2xl p-6 border-2 border-amber-200 sticky top-6">
+                            <h3 className="text-2xl font-black text-gray-900 mb-6 text-center">Order Summary</h3>
 
                             <div className="space-y-4 mb-6 max-h-64 overflow-y-auto">
                                 {items.map((item) => (
                                     <div
                                         key={item.variantId}
-                                        className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 border border-gray-200"
+                                        className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-4 border-2 border-amber-200"
                                     >
                                         <div className="flex justify-between items-start">
                                             <div>
-                                                <h4 className="font-semibold text-gray-800 mb-1">{item.title}</h4>
-                                                <p className="text-gray-500 text-sm">× {item.quantity}</p>
+                                                <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+                                                <p className="text-gray-600 text-sm font-semibold">× {item.quantity}</p>
                                             </div>
-                                            <p className="text-blue-600 font-semibold">
+                                            <p className="text-amber-600 font-black">
                                                 {formatPrice(item.price * item.quantity)}
                                             </p>
                                         </div>
 
-                                        <div className="border-t border-gray-200 mt-2 pt-2 text-sm text-gray-600">
+                                        <div className="border-t border-amber-200 mt-3 pt-3 text-sm text-gray-700 space-y-1">
                                             {item.customAttributes?.date && (
                                                 <div className="flex items-center gap-2">
-                                                    <Calendar className="w-4 h-4 text-blue-400" />
-                                                    <span>
+                                                    <Calendar className="w-4 h-4 text-amber-600" />
+                                                    <span className="font-semibold">
                                                         {new Date(item.customAttributes.date).toLocaleDateString('en-US', {
                                                             weekday: 'short',
                                                             month: 'short',
@@ -641,8 +684,8 @@ export const CartPageComplete: React.FC = () => {
                                             )}
                                             {item.customAttributes?.totalGuests && (
                                                 <div className="flex items-center gap-2">
-                                                    <Users className="w-4 h-4 text-purple-400" />
-                                                    <span>
+                                                    <Users className="w-4 h-4 text-amber-600" />
+                                                    <span className="font-semibold">
                                                         {item.customAttributes.totalGuests}{' '}
                                                         {item.customAttributes.totalGuests === '1' ? 'guest' : 'guests'}
                                                     </span>
@@ -653,23 +696,23 @@ export const CartPageComplete: React.FC = () => {
                                 ))}
                             </div>
 
-                            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 space-y-3 border border-gray-200">
-                                <div className="flex justify-between text-gray-600">
+                            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 space-y-3 border-2 border-amber-200">
+                                <div className="flex justify-between text-gray-700 font-medium">
                                     <span>Subtotal</span>
                                     <span>{selectedCurrency?.symbol}{totalPrice.toFixed(2)}</span>
                                 </div>
-                                <div className="flex justify-between text-gray-600">
+                                <div className="flex justify-between text-gray-700 font-medium">
                                     <span>VAT (5%)</span>
                                     <span>{selectedCurrency?.symbol}{tax.toFixed(2)}</span>
                                 </div>
-                                <div className="border-t border-gray-300 pt-3 flex justify-between items-center">
-                                    <span className="text-lg font-bold text-gray-800">Total</span>
-                                    <span className="text-2xl font-extrabold text-blue-600">
+                                <div className="border-t-2 border-amber-300 pt-3 flex justify-between items-center">
+                                    <span className="text-lg font-black text-gray-900">Total</span>
+                                    <span className="text-2xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
                                         {selectedCurrency?.symbol}{finalTotal.toFixed(2)}
                                     </span>
                                 </div>
                                 {selectedCurrency.code !== 'AED' && (
-                                    <div className="text-xs text-gray-500 text-center pt-2 border-t border-gray-200">
+                                    <div className="text-xs text-gray-600 text-center pt-2 border-t border-amber-200 font-medium">
                                         You'll pay AED {finalTotalAED.toFixed(2)}
                                     </div>
                                 )}

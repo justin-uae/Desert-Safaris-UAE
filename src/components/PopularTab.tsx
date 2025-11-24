@@ -1,5 +1,5 @@
 import { useEffect, useRef, useMemo } from 'react';
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight, MapPin, Sparkles } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { fetchAllExcursions } from '../slices/productsSlice';
@@ -44,25 +44,34 @@ export default function PopularTours() {
     }
 
     return (
-        <div className="bg-white py-8 sm:py-12 md:py-16">
+        <div className="bg-gradient-to-b from-white via-amber-50/20 to-white py-12 sm:py-16 md:py-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <div className="flex items-center justify-between mb-6 sm:mb-8 md:mb-10">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">Popular Tours</h2>
+                <div className="flex items-center justify-between mb-8 sm:mb-10 md:mb-12">
+                    <div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-amber-500" />
+                            <span className="text-amber-600 text-xs sm:text-sm font-bold uppercase tracking-wider">Featured</span>
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-900">
+                            Popular Desert Safaris
+                        </h2>
+                        <p className="text-gray-600 text-sm sm:text-base font-medium mt-2">Handpicked adventures loved by travelers</p>
+                    </div>
                     <div className="hidden sm:flex gap-2">
                         <button
                             onClick={() => scroll('left')}
-                            className="bg-gray-100 hover:bg-gray-200 rounded-full p-2 md:p-3 transition-colors"
+                            className="bg-white border-2 border-amber-200 hover:border-amber-400 hover:bg-amber-50 rounded-full p-3 transition-all shadow-md hover:shadow-lg group"
                             aria-label="Scroll left"
                         >
-                            <ChevronLeft className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
+                            <ChevronLeft className="w-5 h-5 text-amber-600 group-hover:text-amber-700" />
                         </button>
                         <button
                             onClick={() => scroll('right')}
-                            className="bg-gray-100 hover:bg-gray-200 rounded-full p-2 md:p-3 transition-colors"
+                            className="bg-white border-2 border-amber-200 hover:border-amber-400 hover:bg-amber-50 rounded-full p-3 transition-all shadow-md hover:shadow-lg group"
                             aria-label="Scroll right"
                         >
-                            <ChevronRight className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
+                            <ChevronRight className="w-5 h-5 text-amber-600 group-hover:text-amber-700" />
                         </button>
                     </div>
                 </div>
@@ -70,71 +79,103 @@ export default function PopularTours() {
                 {/* Tours Scrollable Row */}
                 <div
                     ref={scrollRef}
-                    className="flex gap-3 sm:gap-4 md:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-2 -mx-4 px-4 sm:mx-0 sm:px-0"
+                    className="flex gap-4 sm:gap-5 md:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4 -mx-4 px-4 sm:mx-0 sm:px-0"
                     style={{ scrollBehavior: 'smooth', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
-                    {topTours.map((tour) => (
+                    {topTours.map((tour, index) => (
                         <div
                             key={tour.id}
-                            className="group cursor-pointer w-[75vw] sm:w-[45vw] md:w-[300px] lg:w-[280px] flex-shrink-0"
+                            className="group cursor-pointer w-[75vw] sm:w-[45vw] md:w-[320px] lg:w-[300px] flex-shrink-0 transform hover:scale-[1.02] transition-all duration-300"
                             onClick={() => goToDetail(tour.id)}
                         >
-                            {/* Image */}
-                            <div className="relative h-52 sm:h-56 md:h-60 lg:h-64 rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-4 bg-gray-200">
-                                <img
-                                    src={tour.images[0]}
-                                    alt={tour.title}
-                                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                                    loading="lazy"
-                                    onError={(e) => {
-                                        console.error('Tour image failed to load:', tour.images[0]);
-                                        e.currentTarget.src = 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600';
-                                    }}
-                                />
+                            {/* Card Container */}
+                            <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-amber-200">
+                                {/* Image */}
+                                <div className="relative h-52 sm:h-56 md:h-60 lg:h-64 overflow-hidden bg-gradient-to-br from-amber-100 to-orange-100">
+                                    <img
+                                        src={tour.images[0]}
+                                        alt={tour.title}
+                                        className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                                        loading="lazy"
+                                        onError={(e) => {
+                                            console.error('Tour image failed to load:', tour.images[0]);
+                                            e.currentTarget.src = 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600';
+                                        }}
+                                    />
 
-                                {/* Price Badge */}
-                                <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 bg-white/95 backdrop-blur-sm rounded-full px-2.5 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 shadow-md">
-                                    {tour.price && (
-                                        <div className="flex flex-col">
-                                            {/* Original (Strikethrough) Price */}
-                                            <span className="text-[10px] sm:text-xs text-gray-500 line-through leading-tight">
-                                                {/* <span className="font-semibold">{selectedCurrency?.symbol} </span> */}
-                                                {formatPrice(tour.price + 60)}
-                                            </span>
-                                            {/* Current Price */}
-                                            <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900 leading-tight">
-                                                {formatPrice(tour.price)}
-                                            </span>
+                                    {/* Gradient Overlay */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                                    {/* Trending Badge - Show for first 3 tours */}
+                                    {index < 3 && (
+                                        <div className="absolute top-3 left-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+                                            <Sparkles className="w-3 h-3" />
+                                            <span>Trending</span>
                                         </div>
                                     )}
-                                </div>
-                            </div>
 
-                            {/* Content */}
-                            <div className="px-1">
-                                <div className="flex items-center justify-between mb-1 sm:mb-1.5">
-                                    <span className="text-[11px] sm:text-xs md:text-sm text-gray-500 truncate max-w-[60%]">{tour.location}</span>
-                                    <div className="flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
-                                        <Star className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 fill-yellow-400 text-yellow-400" />
-                                        <span className="text-[11px] sm:text-xs md:text-sm font-semibold text-gray-900">
+                                    {/* Price Badge */}
+                                    <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2 shadow-xl border border-amber-100">
+                                        {tour.price && (
+                                            <div className="flex flex-col">
+                                                {/* Original (Strikethrough) Price */}
+                                                <span className="text-[10px] sm:text-xs text-gray-500 line-through leading-tight">
+                                                    {formatPrice(tour.price + 60)}
+                                                </span>
+                                                {/* Current Price */}
+                                                <div className="flex items-baseline gap-1">
+                                                    <span className="text-sm sm:text-base md:text-lg font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent leading-tight">
+                                                        {formatPrice(tour.price)}
+                                                    </span>
+                                                    <span className="text-[9px] text-gray-600 font-semibold">/person</span>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Rating Badge */}
+                                    <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm rounded-full px-2.5 py-1.5 shadow-lg border border-amber-100 flex items-center gap-1">
+                                        <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-amber-400 text-amber-400" />
+                                        <span className="text-xs sm:text-sm font-bold text-gray-900">
                                             {tour.rating.toFixed(1)}
                                         </span>
                                     </div>
                                 </div>
 
-                                <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
-                                    {tour.title}
-                                </h3>
+                                {/* Content */}
+                                <div className="p-4">
+                                    {/* Location */}
+                                    <div className="flex items-center gap-1.5 mb-2">
+                                        <MapPin className="w-3.5 h-3.5 text-amber-600 flex-shrink-0" />
+                                        <span className="text-xs sm:text-sm text-gray-600 font-semibold truncate">
+                                            {tour.location}
+                                        </span>
+                                    </div>
+
+                                    {/* Title */}
+                                    <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 group-hover:text-amber-600 transition-colors line-clamp-2 leading-tight mb-3">
+                                        {tour.title}
+                                    </h3>
+
+                                    {/* View Details Button */}
+                                    <button className="w-full bg-gradient-to-r from-amber-50 to-orange-50 group-hover:from-amber-500 group-hover:to-orange-500 text-amber-700 group-hover:text-white font-bold text-sm py-2.5 rounded-lg transition-all duration-300 border-2 border-amber-200 group-hover:border-transparent shadow-sm group-hover:shadow-md">
+                                        View Details
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     ))}
                 </div>
 
                 {/* View All Button */}
-                <div className="text-center mt-8 sm:mt-10 md:mt-12">
+                <div className="text-center mt-10 sm:mt-12 md:mt-14">
                     <Link to={"/excursions"}>
-                        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base rounded-full transition-colors shadow-md hover:shadow-lg">
-                            View All Tours
+                        <button className="group relative bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 text-white font-bold px-8 sm:px-10 md:px-12 py-3 sm:py-3.5 md:py-4 text-sm sm:text-base md:text-lg rounded-full transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl overflow-hidden">
+                            <span className="relative z-10 flex items-center justify-center gap-2">
+                                Explore All Desert Safaris
+                                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         </button>
                     </Link>
                 </div>

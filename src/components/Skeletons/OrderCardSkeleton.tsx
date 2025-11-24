@@ -1,7 +1,7 @@
 export const OrderCardSkeleton = () => (
-    <div className="bg-white/80 backdrop-blur-xl shadow-xl rounded-3xl overflow-hidden border border-white/20 animate-pulse">
+    <div className="bg-gradient-to-br from-amber-600 via-orange-600 to-amber-700 animate-pulse">
         {/* Header Skeleton */}
-        <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 p-4 sm:p-6 md:p-8">
+        <div className="bg-gradient-to-br from-amber-600 via-orange-600 to-amber-700 p-4 sm:p-6 md:p-8">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
                 <div className="flex items-center gap-2 sm:gap-3">
                     <div className="bg-white/20 w-10 h-10 sm:w-14 sm:h-14 rounded-xl"></div>

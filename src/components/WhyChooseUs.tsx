@@ -1,4 +1,4 @@
-import { Shield, Award, Headphones, Wallet, Clock, Users, Star, Globe } from 'lucide-react';
+import { Shield, Award, Headphones, Wallet, Clock, Users, Star, Globe, Sparkles, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function WhyChooseUs() {
@@ -6,22 +6,22 @@ export default function WhyChooseUs() {
         {
             icon: Shield,
             title: "Safe & Secure",
-            description: "100% secure payment and verified tours"
+            description: "100% secure payment and verified desert experiences"
         },
         {
             icon: Award,
             title: "Best Price Guarantee",
-            description: "Find a better price? We'll match it"
+            description: "Find a better price? We'll match it instantly"
         },
         {
             icon: Headphones,
             title: "24/7 Support",
-            description: "Customer support whenever you need"
+            description: "Expert assistance whenever you need us"
         },
         {
             icon: Wallet,
             title: "Easy Booking",
-            description: "Quick and simple booking process"
+            description: "Quick and seamless booking experience"
         }
     ];
 
@@ -29,7 +29,7 @@ export default function WhyChooseUs() {
         {
             icon: Users,
             number: "50K+",
-            label: "Happy Customers"
+            label: "Happy Adventurers"
         },
         {
             icon: Star,
@@ -39,44 +39,54 @@ export default function WhyChooseUs() {
         {
             icon: Globe,
             number: "200+",
-            label: "Tour Packages"
+            label: "Desert Experiences"
         },
         {
             icon: Clock,
             number: "15+",
-            label: "Years Experience"
+            label: "Years of Excellence"
         }
     ];
 
     return (
-        <div className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-12 sm:py-16 md:py-20">
+        <div className="bg-gradient-to-b from-white via-amber-50/30 to-white py-16 sm:py-20 md:py-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <div className="text-center mb-10 sm:mb-12 md:mb-16">
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
-                        Why Choose Us
+                <div className="text-center mb-12 sm:mb-14 md:mb-16">
+                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-100 to-orange-100 px-4 py-2 rounded-full mb-4 border border-amber-200">
+                        <Sparkles className="w-4 h-4 text-amber-600" />
+                        <span className="text-amber-700 text-sm font-bold uppercase tracking-wider">Why Choose Us</span>
+                    </div>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-4 sm:mb-5">
+                        Your Trusted Desert
+                        <span className="block bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 bg-clip-text text-transparent">
+                            Adventure Partner
+                        </span>
                     </h2>
-                    <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
-                        We make your travel dreams come true with exceptional service and unforgettable experiences
+                    <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4 font-medium">
+                        We transform your desert dreams into reality with exceptional service, authentic experiences, and unforgettable moments
                     </p>
                 </div>
 
                 {/* Features Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16 md:mb-20">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 md:gap-8 mb-16 sm:mb-20 md:mb-24">
                     {features.map((feature, index) => {
                         const Icon = feature.icon;
                         return (
                             <div
                                 key={index}
-                                className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-7 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-center"
+                                className="group bg-white rounded-2xl p-6 sm:p-7 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-center border-2 border-transparent hover:border-amber-200 relative overflow-hidden"
                             >
-                                <div className="bg-gradient-to-br from-blue-500 to-purple-600 w-14 h-14 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-5 md:mb-6">
-                                    <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
+                                {/* Decorative corner accent */}
+                                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-amber-100 to-orange-100 rounded-bl-full opacity-50 group-hover:opacity-100 transition-opacity"></div>
+
+                                <div className="relative bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 w-16 h-16 sm:w-18 sm:h-18 rounded-2xl flex items-center justify-center mx-auto mb-5 sm:mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <Icon className="w-8 h-8 sm:w-9 sm:h-9 text-white" />
                                 </div>
-                                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
+                                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-amber-700 transition-colors">
                                     {feature.title}
                                 </h3>
-                                <p className="text-sm sm:text-base text-gray-600">
+                                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                                     {feature.description}
                                 </p>
                             </div>
@@ -85,47 +95,75 @@ export default function WhyChooseUs() {
                 </div>
 
                 {/* Stats Section */}
-                <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12">
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                        {stats.map((stat, index) => {
-                            const Icon = stat.icon;
-                            return (
-                                <div key={index} className="text-center">
-                                    <div className="bg-gradient-to-br from-blue-100 to-purple-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                                        <Icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-blue-600" />
+                <div className="relative bg-gradient-to-br from-white to-amber-50/50 rounded-3xl shadow-2xl p-8 sm:p-10 md:p-14 border-2 border-amber-100 overflow-hidden">
+                    {/* Decorative background pattern */}
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-amber-100 to-orange-100 rounded-full opacity-20 blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-orange-100 to-amber-100 rounded-full opacity-20 blur-3xl"></div>
+
+                    <div className="relative">
+                        <div className="text-center mb-10">
+                            <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-2">
+                                Trusted by Thousands
+                            </h3>
+                            <p className="text-gray-600 text-sm sm:text-base font-medium">Our numbers speak for themselves</p>
+                        </div>
+
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+                            {stats.map((stat, index) => {
+                                const Icon = stat.icon;
+                                return (
+                                    <div key={index} className="text-center group">
+                                        <div className="bg-gradient-to-br from-amber-100 to-orange-100 w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-5 shadow-md group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 border-2 border-amber-200">
+                                            <Icon className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 text-amber-600" />
+                                        </div>
+                                        <div className="text-3xl sm:text-4xl md:text-5xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-2">
+                                            {stat.number}
+                                        </div>
+                                        <div className="text-xs sm:text-sm md:text-base text-gray-700 font-bold">
+                                            {stat.label}
+                                        </div>
                                     </div>
-                                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
-                                        {stat.number}
-                                    </div>
-                                    <div className="text-xs sm:text-sm md:text-base text-gray-600 font-medium">
-                                        {stat.label}
-                                    </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
 
                 {/* CTA Banner */}
-                <div className="mt-10 sm:mt-12 md:mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center shadow-2xl">
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4 px-2">
-                        Ready for Your Next Adventure?
-                    </h3>
-                    <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
-                        Book your dream tour today and create memories that last a lifetime
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
-                        <Link to={'/excursions'} className="w-full sm:w-auto">
-                            <button className="w-full sm:w-auto bg-white text-blue-600 hover:bg-gray-100 font-bold px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base rounded-full transition-colors shadow-lg">
-                                Explore Tours
-                            </button>
-                        </Link>
+                <div className="mt-12 sm:mt-16 md:mt-20 relative bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 rounded-3xl p-8 sm:p-10 md:p-14 text-center shadow-2xl overflow-hidden">
+                    {/* Animated background pattern */}
+                    <div className="absolute inset-0 opacity-10">
+                        <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full blur-2xl animate-pulse"></div>
+                        <div className="absolute bottom-10 right-10 w-40 h-40 bg-white rounded-full blur-2xl animate-pulse delay-700"></div>
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-white rounded-full blur-3xl animate-pulse delay-1000"></div>
+                    </div>
 
-                        <Link to={'/contact'} className="w-full sm:w-auto">
-                            <button className="w-full sm:w-auto bg-transparent border-2 border-white text-white hover:bg-white/10 font-bold px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base rounded-full transition-colors">
-                                Contact Us
-                            </button>
-                        </Link>
+                    <div className="relative">
+                        <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4 border border-white/30">
+                            <Sparkles className="w-4 h-4 text-white" />
+                            <span className="text-white text-xs sm:text-sm font-bold uppercase tracking-wider">Limited Time Offer</span>
+                        </div>
+
+                        <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 sm:mb-5 px-2 drop-shadow-lg">
+                            Ready for Your Desert Adventure?
+                        </h3>
+                        <p className="text-base sm:text-lg md:text-xl text-white/95 mb-8 sm:mb-10 max-w-2xl mx-auto px-4 font-medium drop-shadow">
+                            Book your dream desert safari today and create unforgettable memories under the golden Arabian sun
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
+                            <Link to={'/excursions'} className="w-full sm:w-auto">
+                                <button className="group w-full sm:w-auto bg-white text-amber-700 hover:bg-gray-50 font-bold px-8 sm:px-10 py-4 text-base sm:text-lg rounded-full transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 flex items-center justify-center gap-2">
+                                    <span>Explore Safaris</span>
+                                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                </button>
+                            </Link>
+
+                            <Link to={'/contact'} className="w-full sm:w-auto">
+                                <button className="w-full sm:w-auto bg-transparent border-2 border-white text-white hover:bg-white hover:text-amber-700 font-bold px-8 sm:px-10 py-4 text-base sm:text-lg rounded-full transition-all transform hover:scale-105">
+                                    Contact Us
+                                </button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

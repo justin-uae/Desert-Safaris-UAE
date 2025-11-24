@@ -10,38 +10,48 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-900 text-gray-300 py-6">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300 py-8 relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Company Info with Logo */}
           <div className="flex flex-col items-center md:items-start gap-3 w-full md:w-auto">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 group">
-              <img className="w-14 h-14 sm:w-16 sm:h-16" src={Logo} />
+              <img className="w-12 h-10 sm:w-14 sm:h-14 md:w-16 md:h-14 transform group-hover:scale-110 transition-transform" src={Logo} />
               <div className="flex flex-col">
-                <span className="text-xl sm:text-2xl font-bold text-blue-400">
-                  Excursions Dubai
+                <span className="text-xl sm:text-2xl font-black bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
+                  Desert Safaris UAE
                 </span>
-                <span className="text-xs text-gray-400">Explore the Emirates</span>
+                <span className="text-xs text-gray-400 font-semibold">Unforgettable Desert Adventures</span>
               </div>
             </Link>
 
             {/* Contact Info - Responsive Stack */}
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-6 mt-2">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                <span className="text-sm text-center sm:text-left">Hor Al Anz Building 101, Dubai, UAE</span>
+              <div className="flex items-center gap-2 group">
+                <div className="bg-gradient-to-br from-amber-500 to-orange-500 p-1.5 rounded-lg group-hover:scale-110 transition-transform">
+                  <MapPin className="w-4 h-4 text-white flex-shrink-0" />
+                </div>
+                <span className="text-sm text-center sm:text-left font-medium">Hor Al Anz Building 101, Dubai, UAE</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                <a href="tel:+971545613397" className="text-sm hover:text-blue-400 transition-colors">
+              <div className="flex items-center gap-2 group">
+                <div className="bg-gradient-to-br from-amber-500 to-orange-500 p-1.5 rounded-lg group-hover:scale-110 transition-transform">
+                  <Phone className="w-4 h-4 text-white flex-shrink-0" />
+                </div>
+                <a href="tel:+971545613397" className="text-sm hover:text-amber-400 transition-colors font-medium">
                   +971 54561 3397
                 </a>
               </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                <a href="mailto:info@excursionsdubai.ae" className="text-sm hover:text-blue-400 transition-colors break-all sm:break-normal">
-                  info@excursionsdubai.ae
+              <div className="flex items-center gap-2 group">
+                <div className="bg-gradient-to-br from-amber-500 to-orange-500 p-1.5 rounded-lg group-hover:scale-110 transition-transform">
+                  <Mail className="w-4 h-4 text-white flex-shrink-0" />
+                </div>
+                <a href="mailto:info@desertsafarisuae.com" className="text-sm hover:text-amber-400 transition-colors break-all sm:break-normal font-medium">
+                  info@desertsafarisuae.com
                 </a>
               </div>
             </div>
@@ -53,29 +63,29 @@ export default function Footer() {
               <Link
                 key={link.name}
                 to={link.href}
-                className="text-sm hover:text-blue-400 transition-colors"
+                className="text-sm font-bold hover:text-amber-400 transition-colors relative group"
               >
                 {link.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 group-hover:w-full transition-all duration-300"></span>
               </Link>
             ))}
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="mt-6 pt-6 border-t border-gray-800">
-          <p className="text-center text-sm text-gray-400">
+        <div className="mt-8 pt-6 border-t-2 border-gradient-to-r from-amber-500/20 via-orange-500/20 to-amber-500/20" style={{ borderImage: 'linear-gradient(to right, rgba(245, 158, 11, 0.2), rgba(249, 115, 22, 0.2), rgba(245, 158, 11, 0.2)) 1' }}>
+          <p className="text-center text-sm text-gray-400 font-medium">
             © 2025{' '}
             <a
-              href="https://www.excursionsdubai.ae/"
+              href="https://www.Desertsafarisuae.ae/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-gray-300"
+              className="text-amber-500 hover:text-amber-400 font-bold transition-colors"
             >
-              Excursionsdubai.ae
+              Desertsafarisuae.ae
             </a>{' '}
             is a trading style of Jetset Worldwide Travel & Tourism. All rights reserved.
           </p>
-
         </div>
       </div>
     </footer>

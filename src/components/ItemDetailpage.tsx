@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { MapPin, Clock, Users, Calendar, Star, ChevronLeft, ChevronRight, CheckCircle, Check, FileText } from 'lucide-react';
+import { MapPin, Clock, Users, Calendar, Star, ChevronLeft, ChevronRight, CheckCircle, Check, FileText, Sparkles, ArrowRight } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { fetchExcursionById } from '../slices/productsSlice';
 import { addToCartAsync } from '../slices/cartSlice';
@@ -75,7 +75,7 @@ export default function ItemDetailpage() {
 
     const totalGuests = adults + children;
 
-    const pricePerPerson = excursion?.price || 0; // This is in AED from Shopify
+    const pricePerPerson = excursion?.price || 0;
     const subtotal = formatPrice(pricePerPerson * totalGuests);
 
     // Format date for display
@@ -93,7 +93,7 @@ export default function ItemDetailpage() {
     const handleWhatsAppInquiry = () => {
         if (!excursion) return;
 
-        const phoneNumber = `${import.meta.env.VITE_CONTACT_NUMBER}`; // UAE format: 971 + number without leading zero
+        const phoneNumber = `${import.meta.env.VITE_CONTACT_NUMBER}`;
         console.log("phoneNumber", phoneNumber);
 
         const message = `Hi! I'm interested in booking this excursion:
@@ -156,7 +156,7 @@ export default function ItemDetailpage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-white">
+            <div className="min-h-screen bg-gradient-to-b from-white via-amber-50/20 to-white">
                 {/* Custom Styles for Date Picker */}
                 <style>{`
                     @keyframes shimmer {
@@ -175,9 +175,9 @@ export default function ItemDetailpage() {
                 `}</style>
 
                 {/* Breadcrumb Skeleton */}
-                <div className="border-b">
+                <div className="border-b border-amber-100">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
-                        <div className="h-4 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-pulse rounded w-48 sm:w-64" />
+                        <div className="h-4 bg-gradient-to-r from-amber-200 via-orange-200 to-amber-200 animate-pulse rounded w-48 sm:w-64" />
                     </div>
                 </div>
 
@@ -210,7 +210,7 @@ export default function ItemDetailpage() {
     }
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-gradient-to-b from-white via-amber-50/20 to-white">
             {/* Custom Styles for Date Picker */}
             <style>{`
                 input[type="date"] {
@@ -232,12 +232,12 @@ export default function ItemDetailpage() {
                 }
 
                 input[type="date"]:hover {
-                    border-color: #3B82F6 !important;
+                    border-color: #F59E0B !important;
                 }
 
                 input[type="date"]:focus {
-                    border-color: #3B82F6 !important;
-                    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+                    border-color: #F59E0B !important;
+                    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1) !important;
                 }
 
                 .date-input-wrapper {
@@ -250,33 +250,19 @@ export default function ItemDetailpage() {
                     top: 50%;
                     transform: translateY(-50%);
                     pointer-events: none;
-                    color: #3B82F6;
-                }
-
-                @keyframes shimmer {
-                    0% {
-                        background-position: -1000px 0;
-                    }
-                    100% {
-                        background-position: 1000px 0;
-                    }
-                }
-
-                .animate-pulse {
-                    animation: shimmer 2s infinite;
-                    background-size: 1000px 100%;
+                    color: #F59E0B;
                 }
             `}</style>
 
             {/* Breadcrumb */}
-            <div className="border-b">
+            <div className="border-b border-amber-100 bg-gradient-to-r from-amber-50/50 to-orange-50/50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
-                    <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600 overflow-x-auto whitespace-nowrap">
-                        <Link to="/" className="hover:text-blue-600">Home</Link>
-                        <span> / </span>
-                        <Link to="/excursions" className="hover:text-blue-600">Excursions</Link>
-                        <span> / </span>
-                        <span className="text-gray-900 truncate">{excursion.title}</span>
+                    <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 overflow-x-auto whitespace-nowrap">
+                        <Link to="/" className="hover:text-amber-600 font-medium transition-colors">Home</Link>
+                        <span className="text-amber-400">→</span>
+                        <Link to="/excursions" className="hover:text-amber-600 font-medium transition-colors">Desert Safaris</Link>
+                        <span className="text-amber-400">→</span>
+                        <span className="text-gray-900 font-semibold truncate">{excursion.title}</span>
                     </div>
                 </div>
             </div>
@@ -287,7 +273,7 @@ export default function ItemDetailpage() {
                     <div className="lg:col-span-2 space-y-6 sm:space-y-8">
                         {/* Image Gallery */}
                         <div className="relative">
-                            <div className="relative aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden">
+                            <div className="relative aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-amber-100">
                                 <LazyImage
                                     src={excursion.images[currentImageIndex]}
                                     alt={excursion.title}
@@ -296,20 +282,20 @@ export default function ItemDetailpage() {
 
                                 <button
                                     onClick={prevImage}
-                                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-1.5 sm:p-2 rounded-full transition-all"
+                                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/95 hover:bg-white p-2 sm:p-2.5 rounded-full transition-all shadow-lg hover:scale-110"
                                     aria-label="Previous image"
                                 >
-                                    <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900" />
+                                    <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600" />
                                 </button>
                                 <button
                                     onClick={nextImage}
-                                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-1.5 sm:p-2 rounded-full transition-all"
+                                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/95 hover:bg-white p-2 sm:p-2.5 rounded-full transition-all shadow-lg hover:scale-110"
                                     aria-label="Next image"
                                 >
-                                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900" />
+                                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600" />
                                 </button>
 
-                                <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-black/50 backdrop-blur-sm text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
+                                <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 bg-black/70 backdrop-blur-sm text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold">
                                     {currentImageIndex + 1} / {excursion.images.length}
                                 </div>
                             </div>
@@ -320,9 +306,9 @@ export default function ItemDetailpage() {
                                     <button
                                         key={index}
                                         onClick={() => setCurrentImageIndex(index)}
-                                        className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden flex-shrink-0 ${index === currentImageIndex
-                                            ? 'ring-2 ring-blue-600'
-                                            : 'opacity-60 hover:opacity-100'
+                                        className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden flex-shrink-0 border-2 ${index === currentImageIndex
+                                                ? 'border-amber-500 ring-2 ring-amber-300'
+                                                : 'border-amber-200 opacity-60 hover:opacity-100 hover:border-amber-400'
                                             } transition-all`}
                                     >
                                         <LazyImage
@@ -336,25 +322,29 @@ export default function ItemDetailpage() {
                         </div>
 
                         {/* Title & Details */}
-                        <div>
-                            <div className="flex items-start justify-between mb-3 sm:mb-4 gap-3">
+                        <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-amber-100">
+                            <div className="flex items-start justify-between mb-4 gap-3">
                                 <div className="flex-1 min-w-0">
-                                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">
+                                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-100 to-orange-100 px-3 py-1.5 rounded-full mb-3">
+                                        <Sparkles className="w-4 h-4 text-amber-600" />
+                                        <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">Featured Safari</span>
+                                    </div>
+                                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-3 sm:mb-4">
                                         {excursion.title}
                                     </h1>
                                     <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-sm sm:text-base text-gray-600">
                                         {excursion.location && (
                                             <div className="flex items-center gap-2">
-                                                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-                                                <span className="truncate">{excursion.location}</span>
+                                                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 flex-shrink-0" />
+                                                <span className="truncate font-semibold">{excursion.location}</span>
                                             </div>
                                         )}
                                         <div className="flex items-center gap-2">
-                                            <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400 flex-shrink-0" />
-                                            <span className="font-semibold text-gray-900">
+                                            <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-amber-400 text-amber-400 flex-shrink-0" />
+                                            <span className="font-bold text-gray-900">
                                                 {excursion.rating?.toFixed(1)}
                                             </span>
-                                            <span className="truncate">({excursion.reviewsCount} reviews)</span>
+                                            <span className="truncate font-medium">({excursion.reviewsCount} reviews)</span>
                                         </div>
                                     </div>
                                 </div>
@@ -363,129 +353,130 @@ export default function ItemDetailpage() {
 
                         {/* Quick Info */}
                         <div className="grid grid-cols-3 gap-3 sm:gap-4">
-                            <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center">
-                                <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 mx-auto mb-1.5 sm:mb-2" />
-                                <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-0.5 sm:mb-1">
+                            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-4 sm:p-6 text-center border-2 border-amber-100 shadow-md hover:shadow-lg transition-all">
+                                <Clock className="w-6 h-6 sm:w-7 sm:h-7 text-amber-600 mx-auto mb-2" />
+                                <div className="text-lg sm:text-xl md:text-2xl font-black text-gray-900 mb-1">
                                     {excursion.duration || 'N/A'}
                                 </div>
-                                <div className="text-xs sm:text-sm text-gray-600">Duration</div>
+                                <div className="text-xs sm:text-sm text-gray-600 font-semibold">Duration</div>
                             </div>
-                            <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center">
-                                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 mx-auto mb-1.5 sm:mb-2" />
-                                <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-0.5 sm:mb-1">
+                            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-4 sm:p-6 text-center border-2 border-amber-100 shadow-md hover:shadow-lg transition-all">
+                                <Users className="w-6 h-6 sm:w-7 sm:h-7 text-amber-600 mx-auto mb-2" />
+                                <div className="text-lg sm:text-xl md:text-2xl font-black text-gray-900 mb-1">
                                     {excursion.groupSize || 'N/A'}
                                 </div>
-                                <div className="text-xs sm:text-sm text-gray-600">Group Size</div>
+                                <div className="text-xs sm:text-sm text-gray-600 font-semibold">Group Size</div>
                             </div>
-                            <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center">
-                                <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 mx-auto mb-1.5 sm:mb-2" />
-                                <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-0.5 sm:mb-1">Daily</div>
-                                <div className="text-xs sm:text-sm text-gray-600">Availability</div>
+                            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-4 sm:p-6 text-center border-2 border-amber-100 shadow-md hover:shadow-lg transition-all">
+                                <Calendar className="w-6 h-6 sm:w-7 sm:h-7 text-amber-600 mx-auto mb-2" />
+                                <div className="text-lg sm:text-xl md:text-2xl font-black text-gray-900 mb-1">Daily</div>
+                                <div className="text-xs sm:text-sm text-gray-600 font-semibold">Availability</div>
                             </div>
                         </div>
 
                         {/* Description */}
-                        <div>
-                            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Overview</h2>
+                        <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-amber-100">
+                            <h2 className="text-xl sm:text-2xl font-black text-gray-900 mb-4 flex items-center gap-2">
+                                <span className="w-1.5 h-8 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
+                                Overview
+                            </h2>
                             <div
                                 className="text-sm sm:text-base text-gray-700 leading-relaxed prose prose-sm sm:prose max-w-none"
                                 dangerouslySetInnerHTML={{ __html: excursion.descriptionHtml }}
                             />
                         </div>
+
                         {/* Inclusions */}
-                        {
-                            <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-md border border-gray-100">
-                                <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
-                                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                        <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
-                                    </div>
-                                    <span className="leading-tight">What's Included</span>
-                                </h2>
-
-                                <div className="space-y-2 sm:space-y-3">
-                                    {displayInclusions?.map((inclusion: string, index: number) => (
-                                        <div
-                                            key={index}
-                                            className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-green-50 rounded-lg border border-green-100"
-                                        >
-                                            <div className="w-5 h-5 sm:w-6 sm:h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                                                <Check className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-                                            </div>
-                                            <span className="text-gray-700 font-medium text-xs sm:text-sm md:text-base leading-snug">{inclusion}</span>
-                                        </div>
-                                    ))}
+                        <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-amber-100">
+                            <h2 className="text-xl sm:text-2xl font-black text-gray-900 mb-6 flex items-center gap-3">
+                                <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-500 rounded-xl flex items-center justify-center">
+                                    <CheckCircle className="w-6 h-6 text-white" />
                                 </div>
+                                <span>What's Included</span>
+                            </h2>
 
-                                {safetyPdfUrl && (
-                                    <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-lg">
-                                        <div className="flex flex-col sm:flex-row items-start gap-3">
-                                            <div className="flex-1 min-w-0 w-full">
-                                                <h3 className="font-bold text-red-800 mb-1.5 sm:mb-2 text-sm sm:text-base">
-                                                    Important Safety Information
-                                                </h3>
-                                                <p className="text-xs sm:text-sm text-red-700 mb-3 leading-relaxed">
-                                                    Please read the safety guidelines before your skydive experience.
-                                                </p>
-                                                <a
-                                                    href={safetyPdfUrl}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg transition-colors text-xs sm:text-sm w-full sm:w-auto"
-                                                >
-                                                    <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                                                    <span>View Safety Guide (PDF)</span>
-                                                </a>
-                                            </div>
+                            <div className="space-y-3">
+                                {displayInclusions?.map((inclusion: string, index: number) => (
+                                    <div
+                                        key={index}
+                                        className="flex items-center gap-3 p-3 bg-green-50 rounded-xl border-2 border-green-200 hover:bg-green-100 transition-colors"
+                                    >
+                                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <Check className="w-4 h-4 text-white" />
+                                        </div>
+                                        <span className="text-gray-800 font-semibold text-sm sm:text-base">{inclusion}</span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {safetyPdfUrl && (
+                                <div className="mt-6 p-4 bg-red-50 border-2 border-red-200 rounded-xl">
+                                    <div className="flex flex-col sm:flex-row items-start gap-3">
+                                        <div className="flex-1 min-w-0 w-full">
+                                            <h3 className="font-bold text-red-800 mb-2 text-base">
+                                                Important Safety Information
+                                            </h3>
+                                            <p className="text-sm text-red-700 mb-3 leading-relaxed">
+                                                Please read the safety guidelines before your skydive experience.
+                                            </p>
+                                            <a
+                                                href={safetyPdfUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm w-full sm:w-auto shadow-lg"
+                                            >
+                                                <FileText className="w-4 h-4" />
+                                                <span>View Safety Guide (PDF)</span>
+                                            </a>
                                         </div>
                                     </div>
-                                )}
-                            </div>
-                        }
+                                </div>
+                            )}
+                        </div>
                         <ExcursionDetailPageCommonSection />
                     </div>
 
                     {/* Right Column - Booking */}
                     <div className="lg:col-span-1">
                         <div className="sticky top-4 sm:top-8">
-                            <div className="bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 shadow-lg">
+                            <div className="bg-white border-2 border-amber-200 rounded-3xl p-6 sm:p-8 shadow-2xl">
                                 {/* Price */}
-                                <div className="mb-5 sm:mb-6">
+                                <div className="mb-6">
                                     {excursion.price && (
-                                        <div className="flex items-baseline gap-2 sm:gap-3 mb-2">
-                                            {/* Original (Strikethrough) Price */}
-                                            <span className="text-xs sm:text-sm text-gray-500 line-through">
-                                                {/* <span className="font-semibold"></span> */}
+                                        <div className="flex items-center gap-3 mb-2">
+                                            {/* Original Price */}
+                                            <span className="text-sm text-gray-500 line-through font-medium">
                                                 {formatPrice(excursion.price + 60)}
                                             </span>
-                                            {/* Discount Percentage */}
-                                            <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">
+                                            {/* Discount Badge */}
+                                            <span className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-md">
+                                                <Sparkles className="w-3 h-3" />
                                                 {Math.round(((60) / (excursion.price + 60)) * 100)}% OFF
                                             </span>
                                         </div>
                                     )}
-                                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">
-                                        {/* <span className="text-sm font-semibold text-gray-500">AED</span> */}
+                                    <div className="text-4xl sm:text-5xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
                                         {formatPrice(excursion.price)}
                                     </div>
-                                    <div className="text-xs sm:text-sm text-gray-600 mt-1">per person</div>
+                                    <div className="text-sm text-gray-600 mt-1 font-medium">per person</div>
                                 </div>
 
                                 {/* Date Selection */}
-                                <div className="space-y-3.5 sm:space-y-4 mb-5 sm:mb-6">
+                                <div className="space-y-4 mb-6">
                                     <div>
-                                        <label className="block text-xs sm:text-sm font-semibold text-gray-900 mb-2">
+                                        <label className="block text-sm font-bold text-gray-900 mb-2">
                                             Select Date
                                         </label>
 
                                         {/* Date Display Box */}
-                                        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg sm:rounded-xl p-3 sm:p-4 mb-2.5 sm:mb-3 border-2 border-blue-200">
-                                            <div className="flex items-center gap-2 sm:gap-3">
-                                                <div className="bg-blue-600 rounded-lg p-1.5 sm:p-2 flex-shrink-0">
-                                                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                                        <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-4 mb-3 border-2 border-amber-200">
+                                            <div className="flex items-center gap-3">
+                                                <div className="bg-gradient-to-br from-amber-500 to-orange-500 rounded-lg p-2 flex-shrink-0">
+                                                    <Calendar className="w-5 h-5 text-white" />
                                                 </div>
                                                 <div className="flex-1 min-w-0">
-                                                    <div className="text-xs text-gray-600 mb-0.5 sm:mb-1">Selected Date</div>
-                                                    <div className="text-xs sm:text-sm font-bold text-gray-900 truncate">
+                                                    <div className="text-xs text-gray-600 mb-0.5 font-medium">Selected Date</div>
+                                                    <div className="text-sm font-bold text-gray-900 truncate">
                                                         {formatDateDisplay(selectedDate)}
                                                     </div>
                                                 </div>
@@ -499,33 +490,33 @@ export default function ItemDetailpage() {
                                                 value={selectedDate}
                                                 onChange={(e) => setSelectedDate(e.target.value)}
                                                 min={getTodayDate()}
-                                                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-10 sm:pr-12 border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-medium text-sm sm:text-base text-gray-900 hover:border-blue-400 cursor-pointer"
+                                                className="w-full px-4 py-3 pr-12 border-2 border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all font-semibold text-gray-900 hover:border-amber-300 cursor-pointer"
                                             />
-                                            <Calendar className="calendar-icon w-4 h-4 sm:w-5 sm:h-5" />
+                                            <Calendar className="calendar-icon w-5 h-5" />
                                         </div>
                                     </div>
 
                                     {/* Guests */}
                                     <div>
-                                        <label className="block text-xs sm:text-sm font-semibold text-gray-900 mb-2">
+                                        <label className="block text-sm font-bold text-gray-900 mb-2">
                                             Guests
                                         </label>
-                                        <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+                                        <div className="grid grid-cols-2 gap-3">
                                             <div>
-                                                <label className="block text-xs text-gray-600 mb-1">Adults</label>
-                                                <div className="flex items-center border-2 border-gray-200 rounded-lg sm:rounded-xl overflow-hidden hover:border-blue-400 transition-colors">
+                                                <label className="block text-xs text-gray-600 mb-1.5 font-semibold">Adults</label>
+                                                <div className="flex items-center border-2 border-amber-200 rounded-xl overflow-hidden hover:border-amber-300 transition-colors">
                                                     <button
                                                         onClick={() => setAdults(Math.max(1, adults - 1))}
-                                                        className="px-2.5 sm:px-3 py-2 hover:bg-blue-50 transition-colors font-bold text-gray-700 text-sm sm:text-base"
+                                                        className="px-3 py-2 hover:bg-amber-50 transition-colors font-bold text-gray-700"
                                                         type="button"
                                                         aria-label="Decrease adults"
                                                     >
                                                         -
                                                     </button>
-                                                    <span className="flex-1 text-center font-bold text-gray-900 text-sm sm:text-base">{adults}</span>
+                                                    <span className="flex-1 text-center font-bold text-gray-900">{adults}</span>
                                                     <button
                                                         onClick={() => setAdults(adults + 1)}
-                                                        className="px-2.5 sm:px-3 py-2 hover:bg-blue-50 transition-colors font-bold text-gray-700 text-sm sm:text-base"
+                                                        className="px-3 py-2 hover:bg-amber-50 transition-colors font-bold text-gray-700"
                                                         type="button"
                                                         aria-label="Increase adults"
                                                     >
@@ -534,20 +525,20 @@ export default function ItemDetailpage() {
                                                 </div>
                                             </div>
                                             <div>
-                                                <label className="block text-xs text-gray-600 mb-1">Children</label>
-                                                <div className="flex items-center border-2 border-gray-200 rounded-lg sm:rounded-xl overflow-hidden hover:border-blue-400 transition-colors">
+                                                <label className="block text-xs text-gray-600 mb-1.5 font-semibold">Children</label>
+                                                <div className="flex items-center border-2 border-amber-200 rounded-xl overflow-hidden hover:border-amber-300 transition-colors">
                                                     <button
                                                         onClick={() => setChildren(Math.max(0, children - 1))}
-                                                        className="px-2.5 sm:px-3 py-2 hover:bg-blue-50 transition-colors font-bold text-gray-700 text-sm sm:text-base"
+                                                        className="px-3 py-2 hover:bg-amber-50 transition-colors font-bold text-gray-700"
                                                         type="button"
                                                         aria-label="Decrease children"
                                                     >
                                                         -
                                                     </button>
-                                                    <span className="flex-1 text-center font-bold text-gray-900 text-sm sm:text-base">{children}</span>
+                                                    <span className="flex-1 text-center font-bold text-gray-900">{children}</span>
                                                     <button
                                                         onClick={() => setChildren(children + 1)}
-                                                        className="px-2.5 sm:px-3 py-2 hover:bg-blue-50 transition-colors font-bold text-gray-700 text-sm sm:text-base"
+                                                        className="px-3 py-2 hover:bg-amber-50 transition-colors font-bold text-gray-700"
                                                         type="button"
                                                         aria-label="Increase children"
                                                     >
@@ -556,9 +547,9 @@ export default function ItemDetailpage() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="mt-2.5 sm:mt-3 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm">
-                                            <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 flex-shrink-0" />
-                                            <span className="text-gray-700">
+                                        <div className="mt-3 flex items-center gap-2 text-sm">
+                                            <Users className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                                            <span className="text-gray-700 font-medium">
                                                 Total: <span className="font-bold text-gray-900">{totalGuests}</span> {totalGuests === 1 ? 'guest' : 'guests'}
                                             </span>
                                         </div>
@@ -566,22 +557,21 @@ export default function ItemDetailpage() {
                                 </div>
 
                                 {/* Total */}
-                                <div className="bg-gray-50 rounded-lg sm:rounded-xl p-3.5 sm:p-4 mb-5 sm:mb-6">
-                                    <div className="flex items-center justify-between mb-2 text-xs sm:text-sm">
-                                        <span className="text-gray-600">
+                                <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-4 mb-6 border-2 border-amber-200">
+                                    <div className="flex items-center justify-between mb-2 text-sm">
+                                        <span className="text-gray-700 font-medium">
                                             Subtotal ({totalGuests} {totalGuests === 1 ? 'guest' : 'guests'})
                                         </span>
-                                        <span className="font-semibold text-gray-900">
-                                            {/* <span className="text-xs sm:text-sm font-semibold text-gray-500">AED</span> */}
+                                        <span className="font-bold text-gray-900">
                                             {subtotal}
                                         </span>
                                     </div>
-                                    <div className="border-t border-gray-200 pt-2 mt-2">
+                                    <div className="border-t-2 border-amber-200 pt-3 mt-2">
                                         <div className="flex items-center justify-between">
-                                            <span className="text-base sm:text-lg font-bold text-gray-900">Total</span>
-                                            <span className="text-xl sm:text-2xl font-bold text-blue-600">
-                                                {/* <span className="text-xs sm:text-sm font-semibold text-gray-500">AED</span> */}
-                                                {subtotal}</span>
+                                            <span className="text-lg font-black text-gray-900">Total</span>
+                                            <span className="text-2xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
+                                                {subtotal}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -590,36 +580,37 @@ export default function ItemDetailpage() {
                                     <button
                                         onClick={handleBookNow}
                                         disabled={addingToCart}
-                                        className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-3 sm:py-4 text-sm sm:text-base rounded-lg sm:rounded-xl transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg shadow-blue-500/30"
+                                        className="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-xl flex items-center justify-center gap-2"
                                     >
-                                        {addingToCart ? 'Adding to Cart...' : 'Book Now →'}
+                                        {addingToCart ? 'Adding to Cart...' : (
+                                            <>
+                                                Book Now
+                                                <ArrowRight className="w-5 h-5" />
+                                            </>
+                                        )}
                                     </button>
                                     <button
                                         onClick={handleWhatsAppInquiry}
-                                        className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 sm:py-4 text-sm sm:text-base rounded-lg sm:rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-green-500/30 flex items-center justify-center gap-2"
+                                        className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 shadow-xl flex items-center justify-center gap-2"
                                     >
                                         Inquire via WhatsApp
                                         <FaWhatsapp className="w-5 h-5" />
                                     </button>
                                 </div>
-
-                                <p className="text-xs text-center text-gray-500 mt-3 sm:mt-4">
-                                    Free cancellation up to 24 hours before
-                                </p>
                             </div>
 
                             {/* Trust Badges */}
-                            <div className="mt-4 sm:mt-6 bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6">
-                                <div className="text-center mb-3 sm:mb-4">
-                                    <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                            <div className="mt-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border-2 border-amber-200 shadow-lg">
+                                <div className="text-center">
+                                    <div className="text-4xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-2">
                                         {excursion.rating?.toFixed(1)}/5
                                     </div>
-                                    <div className="flex items-center justify-center gap-0.5 sm:gap-1 mb-1">
+                                    <div className="flex items-center justify-center gap-1 mb-2">
                                         {[...Array(5)].map((_, i) => (
-                                            <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
+                                            <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
                                         ))}
                                     </div>
-                                    <div className="text-xs sm:text-sm text-gray-600">
+                                    <div className="text-sm text-gray-700 font-semibold">
                                         Based on {excursion.reviewsCount} reviews
                                     </div>
                                 </div>

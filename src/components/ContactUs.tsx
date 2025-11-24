@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Sparkles, Clock, CheckCircle } from 'lucide-react';
 import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 function ContactForm() {
@@ -73,24 +73,37 @@ function ContactForm() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16 md:py-20">
+        <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20">
                 {/* Header */}
-                <div className="text-center mb-10 sm:mb-12 md:mb-16">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">Contact Us</h1>
-                    <p className="text-base sm:text-lg md:text-xl text-gray-600">We'd love to hear from you</p>
+                <div className="text-center mb-12 sm:mb-16 md:mb-20">
+                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-100 to-orange-100 border-2 border-amber-200 px-5 py-2.5 rounded-full mb-6">
+                        <Sparkles className="w-4 h-4 text-amber-600" />
+                        <span className="text-amber-700 text-sm font-bold uppercase tracking-wider">Get In Touch</span>
+                    </div>
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-4 sm:mb-5 px-2">
+                        Contact Us
+                    </h1>
+                    <p className="text-lg sm:text-xl md:text-2xl text-gray-600 font-medium max-w-2xl mx-auto">
+                        Have questions about your desert adventure? We're here to help!
+                    </p>
                 </div>
 
                 {/* Main Content */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12">
                     {/* Contact Form */}
-                    <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg">
-                        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-5 sm:mb-6">Send a Message</h2>
+                    <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-2xl border-2 border-amber-100">
+                        <div className="flex items-center gap-3 mb-6 sm:mb-8">
+                            <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                                <Send className="w-6 h-6 text-white" />
+                            </div>
+                            <h2 className="text-2xl sm:text-3xl font-black text-gray-900">Send a Message</h2>
+                        </div>
 
-                        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 md:space-y-6">
+                        <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
                             <div>
-                                <label className="block text-xs sm:text-sm font-medium text-gray-900 mb-1.5 sm:mb-2">
-                                    Name *
+                                <label className="block text-sm font-black text-gray-900 mb-2">
+                                    Your Name *
                                 </label>
                                 <input
                                     type="text"
@@ -99,14 +112,14 @@ function ContactForm() {
                                     onChange={handleChange}
                                     required
                                     disabled={formStatus === 'loading'}
-                                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
-                                    placeholder="Your name"
+                                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-base border-2 border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 disabled:bg-gray-100 disabled:cursor-not-allowed transition-all font-medium"
+                                    placeholder="John Doe"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-xs sm:text-sm font-medium text-gray-900 mb-1.5 sm:mb-2">
-                                    Email *
+                                <label className="block text-sm font-black text-gray-900 mb-2">
+                                    Email Address *
                                 </label>
                                 <input
                                     type="email"
@@ -115,14 +128,14 @@ function ContactForm() {
                                     onChange={handleChange}
                                     required
                                     disabled={formStatus === 'loading'}
-                                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-base border-2 border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 disabled:bg-gray-100 disabled:cursor-not-allowed transition-all font-medium"
                                     placeholder="your@email.com"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-xs sm:text-sm font-medium text-gray-900 mb-1.5 sm:mb-2">
-                                    Message *
+                                <label className="block text-sm font-black text-gray-900 mb-2">
+                                    Your Message *
                                 </label>
                                 <textarea
                                     name="message"
@@ -130,38 +143,38 @@ function ContactForm() {
                                     onChange={handleChange}
                                     required
                                     disabled={formStatus === 'loading'}
-                                    rows={5}
-                                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
-                                    placeholder="How can we help you?"
+                                    rows={6}
+                                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-base border-2 border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 resize-none disabled:bg-gray-100 disabled:cursor-not-allowed transition-all font-medium"
+                                    placeholder="Tell us about your desert safari plans..."
                                 />
                             </div>
 
                             <button
                                 type="submit"
                                 disabled={formStatus === 'loading'}
-                                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 sm:py-4 text-sm sm:text-base rounded-lg sm:rounded-xl transition-colors flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 text-white font-black py-4 sm:py-5 text-base sm:text-lg rounded-xl transition-all flex items-center justify-center gap-3 shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                             >
                                 {formStatus === 'loading' ? (
                                     <>
-                                        <div className="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 border-b-2 border-white"></div>
-                                        Sending...
+                                        <div className="animate-spin rounded-full h-5 w-5 sm:h-6 sm:w-6 border-b-2 border-white"></div>
+                                        Sending Message...
                                     </>
                                 ) : (
                                     <>
-                                        <Send className="w-4 h-4 sm:w-5 sm:h-5" />
+                                        <Send className="w-5 h-5 sm:w-6 sm:h-6" />
                                         Send Message
                                     </>
                                 )}
                             </button>
 
                             {/* reCAPTCHA v3 Badge Notice */}
-                            <p className="text-xs text-gray-500 text-center">
+                            <p className="text-xs text-gray-500 text-center font-medium">
                                 This site is protected by reCAPTCHA and the Google{' '}
-                                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-amber-600 hover:text-amber-700 font-bold">
                                     Privacy Policy
                                 </a>{' '}
                                 and{' '}
-                                <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="text-amber-600 hover:text-amber-700 font-bold">
                                     Terms of Service
                                 </a>{' '}
                                 apply.
@@ -170,66 +183,86 @@ function ContactForm() {
 
                         {/* Status Messages */}
                         {formStatus === 'success' && (
-                            <div className="mt-4 p-3 sm:p-4 bg-green-50 border border-green-200 rounded-lg sm:rounded-xl">
-                                <p className="text-green-600 font-semibold text-sm sm:text-base">
-                                    ✅ {responseMessage}
-                                </p>
+                            <div className="mt-6 p-5 bg-green-50 border-2 border-green-200 rounded-xl">
+                                <div className="flex items-center gap-3">
+                                    <CheckCircle className="w-6 h-6 text-green-600" />
+                                    <p className="text-green-700 font-bold text-base">
+                                        {responseMessage}
+                                    </p>
+                                </div>
                             </div>
                         )}
                         {formStatus === 'error' && (
-                            <div className="mt-4 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-lg sm:rounded-xl">
-                                <p className="text-red-600 font-semibold text-sm sm:text-base">
+                            <div className="mt-6 p-5 bg-red-50 border-2 border-red-200 rounded-xl">
+                                <p className="text-red-700 font-bold text-base">
                                     ❌ {responseMessage}
                                 </p>
                             </div>
                         )}
                     </div>
 
-                    {/* Contact Info */}
-                    <div className="space-y-4 sm:space-y-6">
-                        <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg">
-                            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-5 sm:mb-6">Get in Touch</h2>
+                    {/* Contact Info & Map */}
+                    <div className="space-y-6 sm:space-y-8">
+                        {/* Contact Info */}
+                        <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-2xl border-2 border-amber-100">
+                            <div className="flex items-center gap-3 mb-6 sm:mb-8">
+                                <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                                    <Mail className="w-6 h-6 text-white" />
+                                </div>
+                                <h2 className="text-2xl sm:text-3xl font-black text-gray-900">Contact Details</h2>
+                            </div>
 
-                            <div className="space-y-4 sm:space-y-5 md:space-y-6">
-                                <div className="flex items-start gap-3 sm:gap-4">
-                                    <div className="bg-blue-100 p-2.5 sm:p-3 rounded-lg sm:rounded-xl flex-shrink-0">
-                                        <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+                            <div className="space-y-6">
+                                <div className="flex items-start gap-4 p-5 bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-xl hover:shadow-lg transition-all">
+                                    <div className="bg-gradient-to-br from-amber-500 to-orange-500 p-3 rounded-xl flex-shrink-0 shadow-md">
+                                        <Phone className="w-6 h-6 text-white" />
                                     </div>
                                     <div className="min-w-0">
-                                        <h3 className="font-semibold text-sm sm:text-base text-gray-900 mb-1">Phone</h3>
-                                        <a href="tel:+971545613397" className="text-xs sm:text-sm text-gray-600 hover:text-blue-600 transition-colors break-all">
+                                        <h3 className="font-black text-base text-gray-900 mb-1">Phone</h3>
+                                        <a href="tel:+971545613397" className="text-sm text-amber-700 hover:text-amber-800 transition-colors break-all font-bold">
                                             +971 54561 3397
                                         </a>
                                     </div>
                                 </div>
 
-                                <div className="flex items-start gap-3 sm:gap-4">
-                                    <div className="bg-purple-100 p-2.5 sm:p-3 rounded-lg sm:rounded-xl flex-shrink-0">
-                                        <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
+                                <div className="flex items-start gap-4 p-5 bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-xl hover:shadow-lg transition-all">
+                                    <div className="bg-gradient-to-br from-amber-500 to-orange-500 p-3 rounded-xl flex-shrink-0 shadow-md">
+                                        <Mail className="w-6 h-6 text-white" />
                                     </div>
                                     <div className="min-w-0">
-                                        <h3 className="font-semibold text-sm sm:text-base text-gray-900 mb-1">Email</h3>
-                                        <a href="mailto:info@excursionsdubai.ae" className="text-xs sm:text-sm text-gray-600 hover:text-purple-600 transition-colors break-all">
-                                            info@excursionsdubai.ae
+                                        <h3 className="font-black text-base text-gray-900 mb-1">Email</h3>
+                                        <a href="mailto:info@desertsafarisuae.com" className="text-sm text-amber-700 hover:text-amber-800 transition-colors break-all font-bold">
+                                            info@desertsafarisuae.com
                                         </a>
                                     </div>
                                 </div>
 
-                                <div className="flex items-start gap-3 sm:gap-4">
-                                    <div className="bg-pink-100 p-2.5 sm:p-3 rounded-lg sm:rounded-xl flex-shrink-0">
-                                        <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-pink-600" />
+                                <div className="flex items-start gap-4 p-5 bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-xl hover:shadow-lg transition-all">
+                                    <div className="bg-gradient-to-br from-amber-500 to-orange-500 p-3 rounded-xl flex-shrink-0 shadow-md">
+                                        <MapPin className="w-6 h-6 text-white" />
                                     </div>
                                     <div className="min-w-0">
-                                        <h3 className="font-semibold text-sm sm:text-base text-gray-900 mb-1">Address</h3>
-                                        <p className="text-xs sm:text-sm text-gray-600">Hor Al Anz Building 101,</p>
-                                        <p className="text-xs sm:text-sm text-gray-600">Dubai, UAE</p>
+                                        <h3 className="font-black text-base text-gray-900 mb-1">Address</h3>
+                                        <p className="text-sm text-gray-700 font-medium">Hor Al Anz Building 101,</p>
+                                        <p className="text-sm text-gray-700 font-medium">Dubai, UAE</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-4 p-5 bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-xl hover:shadow-lg transition-all">
+                                    <div className="bg-gradient-to-br from-amber-500 to-orange-500 p-3 rounded-xl flex-shrink-0 shadow-md">
+                                        <Clock className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div className="min-w-0">
+                                        <h3 className="font-black text-base text-gray-900 mb-1">Business Hours</h3>
+                                        <p className="text-sm text-gray-700 font-medium">24/7 Support Available</p>
+                                        <p className="text-xs text-gray-600 font-medium mt-1">We're always here to help!</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         {/* Map */}
-                        <div className="bg-gray-200 rounded-2xl sm:rounded-3xl overflow-hidden h-56 sm:h-64">
+                        <div className="bg-white rounded-3xl overflow-hidden shadow-2xl border-2 border-amber-100 h-72 sm:h-80">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.550738524595!2d55.33634431502644!3d25.27235938385582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5d1e1e1e1e1f%3A0x1e1e1e1e1e1e1e1e!2sHor%20Al%20Anz%2C%20Dubai%2C%20UAE!5e0!3m2!1sen!2sae!4v1234567890123!5m2!1sen!2sae"
                                 width="100%"
@@ -240,6 +273,35 @@ function ContactForm() {
                                 referrerPolicy="no-referrer-when-downgrade"
                                 title="Hor Al Anz Building 101, Dubai, UAE"
                             />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Trust Banner */}
+                <div className="mt-12 sm:mt-16 bg-gradient-to-br from-amber-600 via-orange-600 to-amber-700 rounded-3xl p-8 sm:p-10 text-center text-white shadow-2xl relative overflow-hidden">
+                    {/* Decorative elements */}
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+
+                    <div className="relative z-10">
+                        <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                            <CheckCircle className="w-4 h-4 text-white" />
+                            <span className="text-white text-sm font-bold uppercase tracking-wider">Why Contact Us?</span>
+                        </div>
+                        <h3 className="text-2xl sm:text-3xl font-black mb-4">We're Here to Make Your Desert Experience Perfect</h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8 max-w-4xl mx-auto">
+                            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
+                                <div className="text-3xl font-black mb-2">24/7</div>
+                                <p className="text-white/90 text-sm font-semibold">Customer Support</p>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
+                                <div className="text-3xl font-black mb-2">&lt; 1hr</div>
+                                <p className="text-white/90 text-sm font-semibold">Response Time</p>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
+                                <div className="text-3xl font-black mb-2">100%</div>
+                                <p className="text-white/90 text-sm font-semibold">Satisfaction Rate</p>
+                            </div>
                         </div>
                     </div>
                 </div>
