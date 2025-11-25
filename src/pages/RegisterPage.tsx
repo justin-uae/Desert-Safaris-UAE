@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, Eye, EyeOff, Loader, ArrowRight, Sparkles, CheckCircle } from 'lucide-react';
 import { customerRegister } from '../services/shopifyService';
 import Logo from '../assets/Logo.png';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function RegisterPage() {
     const [firstName, setFirstName] = useState('');
@@ -50,7 +51,8 @@ export default function RegisterPage() {
                 <div className="text-center mb-8">
                     <div className="inline-flex items-center justify-center mb-6">
                         <div className="relative">
-                            <img
+                            <LazyLoadImage
+                                loading='lazy'
                                 src={Logo}
                                 className="w-20 h-18 transform hover:scale-110 transition-transform duration-300"
                                 alt="Desert Safaris UAE"

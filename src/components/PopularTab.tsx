@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { fetchAllExcursions } from '../slices/productsSlice';
 import { PopularToursSkeletonLoader } from './Skeletons/PopularToursSkeletonLoader';
 import { useCurrency } from '../hooks/useCurrency';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function PopularTours() {
     const navigate = useNavigate();
@@ -92,7 +93,7 @@ export default function PopularTours() {
                             <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-amber-200">
                                 {/* Image */}
                                 <div className="relative h-52 sm:h-56 md:h-60 lg:h-64 overflow-hidden bg-gradient-to-br from-amber-100 to-orange-100">
-                                    <img
+                                    <LazyLoadImage
                                         src={tour.images[0]}
                                         alt={tour.title}
                                         className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"

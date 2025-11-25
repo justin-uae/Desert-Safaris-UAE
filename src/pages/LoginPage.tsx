@@ -4,6 +4,7 @@ import { Mail, Lock, Eye, EyeOff, Loader, ArrowRight, Sparkles } from 'lucide-re
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { clearError, loginUser } from '../slices/authSlice';
 import Logo from '../assets/Logo.png';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -59,8 +60,9 @@ export default function LoginPage() {
                 <div className="text-center mb-8">
                     <div className="inline-flex items-center justify-center mb-6">
                         <div className="relative">
-                            <img
+                            <LazyLoadImage
                                 src={Logo}
+                                loading='lazy'
                                 className="w-20 h-18 transform hover:scale-110 transition-transform duration-300"
                                 alt="Desert Safaris UAE"
                             />

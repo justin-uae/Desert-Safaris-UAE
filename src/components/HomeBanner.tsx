@@ -5,6 +5,7 @@ import { fetchCollectionsWithProducts } from '../slices/productsSlice';
 import { useNavigate } from 'react-router-dom';
 import { getMediaUrls } from '../services/shopifyService';
 import ScopedSandParticles from './SandParticles';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function HomepageBanner() {
     const [selectedLocation, setSelectedLocation] = useState('');
@@ -178,13 +179,13 @@ export default function HomepageBanner() {
                             </div>
                         ) : (
                             <>
-                                <img
+                                <LazyLoadImage
                                     src={`${currentBannerImage}`}
                                     alt="Desert Safari Banner"
                                     className="w-full h-full object-cover transition-opacity duration-500"
-                                    onError={(e) => {
-                                        e.currentTarget.style.display = 'none';
-                                    }}
+                                // onError={(e) => {
+                                //     e.currentTarget.style.display = 'none';
+                                // }}
                                 />
                                 {/* Strong dark overlay for text visibility */}
                                 {/* <div className="absolute inset-0 bg-black/40"></div> */}
@@ -321,7 +322,7 @@ export default function HomepageBanner() {
                                                     className="group flex flex-col gap-2 p-2 rounded-xl hover:bg-amber-50 transition-all border-2 border-transparent hover:border-amber-200"
                                                 >
                                                     <div className="w-full h-24 rounded-lg overflow-hidden shadow-md">
-                                                        <img
+                                                        <LazyLoadImage
                                                             src={city?.images?.edges?.[0]?.node?.url || city?.image || 'https://via.placeholder.com/400x300'}
                                                             alt={city.location}
                                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
@@ -385,9 +386,10 @@ export default function HomepageBanner() {
                                         onClick={() => handleCityClick(city?.location)}
                                         className="relative min-w-[280px] md:min-w-[320px] lg:min-w-[380px] rounded-2xl overflow-hidden shadow-xl group cursor-pointer h-72 hover:shadow-2xl transition-all transform hover:scale-[1.02]"
                                     >
-                                        <img
+                                        <LazyLoadImage
                                             src={city?.images?.edges?.[0]?.node?.url || city?.image || 'https://via.placeholder.com/400x300'}
                                             alt={city.title}
+                                            loading='lazy'
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>

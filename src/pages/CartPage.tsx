@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { createOrder } from '../slices/checkoutSlice';
 import { clearCart, removeFromCart, updateQuantity } from '../slices/cartSlice';
 import { useCurrency } from '../hooks/useCurrency';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 type CheckoutStep = 'cart' | 'checkout';
 type CheckoutType = 'guest' | 'account';
@@ -282,7 +283,7 @@ export const CartPageComplete: React.FC = () => {
                                 >
                                     <div className="flex flex-col sm:flex-row gap-6">
                                         <div className="w-full sm:w-32 h-32 flex items-center rounded-xl overflow-hidden bg-gradient-to-br from-amber-100 to-orange-100">
-                                            <img src={item?.image} alt={item.title} className="w-full h-full object-cover" />
+                                            <LazyLoadImage loading='lazy' src={item?.image} alt={item.title} className="w-full h-full object-cover" />
                                         </div>
 
                                         <div className="flex-1">
@@ -455,14 +456,14 @@ export const CartPageComplete: React.FC = () => {
                                         type="button"
                                         onClick={() => handleCheckoutTypeChange('guest')}
                                         className={`p-5 rounded-2xl border-2 transition-all text-left ${checkoutType === 'guest'
-                                                ? 'border-amber-500 bg-gradient-to-br from-amber-50 to-orange-50 shadow-lg'
-                                                : 'border-amber-200 hover:border-amber-300'
+                                            ? 'border-amber-500 bg-gradient-to-br from-amber-50 to-orange-50 shadow-lg'
+                                            : 'border-amber-200 hover:border-amber-300'
                                             }`}
                                     >
                                         <div className="flex items-center gap-3 mb-2">
                                             <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${checkoutType === 'guest'
-                                                    ? 'bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md'
-                                                    : 'bg-gray-100 text-gray-600'
+                                                ? 'bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md'
+                                                : 'bg-gray-100 text-gray-600'
                                                 }`}>
                                                 <UserX className="w-6 h-6" />
                                             </div>
@@ -484,14 +485,14 @@ export const CartPageComplete: React.FC = () => {
                                         type="button"
                                         onClick={() => handleCheckoutTypeChange('account')}
                                         className={`p-5 rounded-2xl border-2 transition-all text-left ${checkoutType === 'account'
-                                                ? 'border-amber-500 bg-gradient-to-br from-amber-50 to-orange-50 shadow-lg'
-                                                : 'border-amber-200 hover:border-amber-300'
+                                            ? 'border-amber-500 bg-gradient-to-br from-amber-50 to-orange-50 shadow-lg'
+                                            : 'border-amber-200 hover:border-amber-300'
                                             }`}
                                     >
                                         <div className="flex items-center gap-3 mb-2">
                                             <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${checkoutType === 'account'
-                                                    ? 'bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md'
-                                                    : 'bg-gray-100 text-gray-600'
+                                                ? 'bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md'
+                                                : 'bg-gray-100 text-gray-600'
                                                 }`}>
                                                 <User className="w-6 h-6" />
                                             </div>

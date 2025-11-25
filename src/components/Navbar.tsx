@@ -6,6 +6,7 @@ import { logout } from '../slices/authSlice';
 import { CurrencySwitcher } from './CurrencySwitcher';
 import { clearOrders } from '../slices/ordersSlice';
 import Logo from '../assets/Logo.png';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -89,7 +90,8 @@ export default function Navbar() {
                     <div className="flex items-center justify-between h-20">
                         <Link to="/" className="flex items-center gap-2 sm:gap-3 group">
                             <div className="flex-shrink-0">
-                                <img
+                                <LazyLoadImage
+                                    loading='lazy'
                                     className="w-12 h-10 sm:w-14 sm:h-12 md:w-16 md:h-14 transform group-hover:scale-110 transition-transform duration-300"
                                     src={Logo}
                                     alt="Desert Safaris UAE Logo"

@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Verify reCAPTCHA v2 (simpler - no score checking!)
     if (!empty($recaptchaToken)) {
-        $recaptchaSecret = '6LexTwwsAAAAAAfjAK_6WpDVGUej2djle6PdyYOJ'; // Your v2 secret key
+        $recaptchaSecret = ''; // Your v2 secret key
         $recaptchaUrl = 'https://www.google.com/recaptcha/api/siteverify';
         
         $recaptchaData = array(

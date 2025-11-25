@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { MapPin, Clock, Users, Calendar, Star, ChevronLeft, ChevronRight, CheckCircle, Check, FileText, Sparkles, ArrowRight } from 'lucide-react';
+import { MapPin, Clock, Users, Calendar, Star, ChevronLeft, ChevronRight, CheckCircle, Check, FileText, Sparkles, ArrowRight, ChevronUp, ChevronDown, Info, AlertCircle, HelpCircle, Award } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { fetchExcursionById } from '../slices/productsSlice';
 import { addToCartAsync } from '../slices/cartSlice';
@@ -8,7 +8,6 @@ import { LazyImage } from './LazyImage';
 import { BookingSkeleton, DetailsSkeleton, ImageGallerySkeleton } from './Skeletons/ItemDetailPage';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useCurrency } from '../hooks/useCurrency';
-import ExcursionDetailPageCommonSection from './ExcursionDetailPageCommonSection';
 
 export default function ItemDetailpage() {
     const { id } = useParams<{ id: string }>();
@@ -32,6 +31,14 @@ export default function ItemDetailpage() {
     const [children, setChildren] = useState(0);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [addingToCart, setAddingToCart] = useState(false);
+
+    // Accordion states
+    const [isOverviewOpen, setIsOverviewOpen] = useState(true);
+    const [isInclusionsOpen, setIsInclusionsOpen] = useState(true);
+    const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
+    const [isImportantInfoOpen, setIsImportantInfoOpen] = useState(false);
+    const [isWhyBookOpen, setIsWhyBookOpen] = useState(false);
+    const [isFaqOpen, setIsFaqOpen] = useState(false);
 
     // Fetch excursion details
     useEffect(() => {
@@ -307,8 +314,8 @@ export default function ItemDetailpage() {
                                         key={index}
                                         onClick={() => setCurrentImageIndex(index)}
                                         className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden flex-shrink-0 border-2 ${index === currentImageIndex
-                                                ? 'border-amber-500 ring-2 ring-amber-300'
-                                                : 'border-amber-200 opacity-60 hover:opacity-100 hover:border-amber-400'
+                                            ? 'border-amber-500 ring-2 ring-amber-300'
+                                            : 'border-amber-200 opacity-60 hover:opacity-100 hover:border-amber-400'
                                             } transition-all`}
                                     >
                                         <LazyImage
@@ -374,66 +381,399 @@ export default function ItemDetailpage() {
                             </div>
                         </div>
 
-                        {/* Description */}
-                        <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-amber-100">
-                            <h2 className="text-xl sm:text-2xl font-black text-gray-900 mb-4 flex items-center gap-2">
-                                <span className="w-1.5 h-8 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
-                                Overview
-                            </h2>
-                            <div
-                                className="text-sm sm:text-base text-gray-700 leading-relaxed prose prose-sm sm:prose max-w-none"
-                                dangerouslySetInnerHTML={{ __html: excursion.descriptionHtml }}
-                            />
+                        {/* Overview - Accordion */}
+                        <div className="bg-white rounded-2xl shadow-lg border-2 border-amber-100 overflow-hidden">
+                            <button
+                                onClick={() => setIsOverviewOpen(!isOverviewOpen)}
+                                className="w-full p-6 flex items-center justify-between hover:bg-amber-50 transition-colors"
+                            >
+                                <h2 className="text-xl sm:text-2xl font-black text-gray-900 flex items-center gap-2">
+                                    <span className="w-1.5 h-8 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
+                                    Overview
+                                </h2>
+                                <div className="flex-shrink-0 ml-4">
+                                    {isOverviewOpen ? (
+                                        <ChevronUp className="w-6 h-6 text-gray-600" />
+                                    ) : (
+                                        <ChevronDown className="w-6 h-6 text-gray-600" />
+                                    )}
+                                </div>
+                            </button>
+
+                            {isOverviewOpen && (
+                                <div className="px-6 pb-6">
+                                    <div
+                                        className="text-sm sm:text-base text-gray-700 leading-relaxed prose prose-sm sm:prose max-w-none"
+                                        dangerouslySetInnerHTML={{ __html: excursion.descriptionHtml }}
+                                    />
+                                </div>
+                            )}
                         </div>
 
-                        {/* Inclusions */}
-                        <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-amber-100">
-                            <h2 className="text-xl sm:text-2xl font-black text-gray-900 mb-6 flex items-center gap-3">
-                                <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-500 rounded-xl flex items-center justify-center">
-                                    <CheckCircle className="w-6 h-6 text-white" />
-                                </div>
-                                <span>What's Included</span>
-                            </h2>
-
-                            <div className="space-y-3">
-                                {displayInclusions?.map((inclusion: string, index: number) => (
-                                    <div
-                                        key={index}
-                                        className="flex items-center gap-3 p-3 bg-green-50 rounded-xl border-2 border-green-200 hover:bg-green-100 transition-colors"
-                                    >
-                                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                                            <Check className="w-4 h-4 text-white" />
-                                        </div>
-                                        <span className="text-gray-800 font-semibold text-sm sm:text-base">{inclusion}</span>
+                        {/* Inclusions - Accordion */}
+                        <div className="bg-white rounded-2xl shadow-lg border-2 border-amber-100 overflow-hidden">
+                            <button
+                                onClick={() => setIsInclusionsOpen(!isInclusionsOpen)}
+                                className="w-full p-6 flex items-center justify-between hover:bg-amber-50 transition-colors"
+                            >
+                                <h2 className="text-xl sm:text-2xl font-black text-gray-900 flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-500 rounded-xl flex items-center justify-center">
+                                        <CheckCircle className="w-6 h-6 text-white" />
                                     </div>
-                                ))}
-                            </div>
+                                    <span>What's Included</span>
+                                </h2>
+                                <div className="flex-shrink-0 ml-4">
+                                    {isInclusionsOpen ? (
+                                        <ChevronUp className="w-6 h-6 text-gray-600" />
+                                    ) : (
+                                        <ChevronDown className="w-6 h-6 text-gray-600" />
+                                    )}
+                                </div>
+                            </button>
 
-                            {safetyPdfUrl && (
-                                <div className="mt-6 p-4 bg-red-50 border-2 border-red-200 rounded-xl">
-                                    <div className="flex flex-col sm:flex-row items-start gap-3">
-                                        <div className="flex-1 min-w-0 w-full">
-                                            <h3 className="font-bold text-red-800 mb-2 text-base">
-                                                Important Safety Information
-                                            </h3>
-                                            <p className="text-sm text-red-700 mb-3 leading-relaxed">
-                                                Please read the safety guidelines before your skydive experience.
-                                            </p>
-                                            <a
-                                                href={safetyPdfUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm w-full sm:w-auto shadow-lg"
+                            {isInclusionsOpen && (
+                                <div className="px-6 pb-6">
+                                    <div className="space-y-3">
+                                        {displayInclusions?.map((inclusion: string, index: number) => (
+                                            <div
+                                                key={index}
+                                                className="flex items-center gap-3 p-3 bg-green-50 rounded-xl border-2 border-green-200 hover:bg-green-100 transition-colors"
                                             >
-                                                <FileText className="w-4 h-4" />
-                                                <span>View Safety Guide (PDF)</span>
-                                            </a>
+                                                <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                                    <Check className="w-4 h-4 text-white" />
+                                                </div>
+                                                <span className="text-gray-800 font-semibold text-sm sm:text-base">{inclusion}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {safetyPdfUrl && (
+                                        <div className="mt-6 p-4 bg-red-50 border-2 border-red-200 rounded-xl">
+                                            <div className="flex flex-col sm:flex-row items-start gap-3">
+                                                <div className="flex-1 min-w-0 w-full">
+                                                    <h3 className="font-bold text-red-800 mb-2 text-base">
+                                                        Important Safety Information
+                                                    </h3>
+                                                    <p className="text-sm text-red-700 mb-3 leading-relaxed">
+                                                        Please read the safety guidelines before your skydive experience.
+                                                    </p>
+
+                                                    <a href={safetyPdfUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm w-full sm:w-auto shadow-lg"
+                                                    >
+                                                        <FileText className="w-4 h-4" />
+                                                        <span>View Safety Guide (PDF)</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* How It Works - Accordion */}
+                        <div className="bg-white rounded-2xl shadow-lg border-2 border-amber-100 overflow-hidden">
+                            <button
+                                onClick={() => setIsHowItWorksOpen(!isHowItWorksOpen)}
+                                className="w-full p-6 flex items-center justify-between hover:bg-amber-50 transition-colors"
+                            >
+                                <h2 className="text-xl sm:text-2xl font-black text-gray-900 flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl flex items-center justify-center">
+                                        <Info className="w-6 h-6 text-white" />
+                                    </div>
+                                    <span>How It Works</span>
+                                </h2>
+                                <div className="flex-shrink-0 ml-4">
+                                    {isHowItWorksOpen ? (
+                                        <ChevronUp className="w-6 h-6 text-gray-600" />
+                                    ) : (
+                                        <ChevronDown className="w-6 h-6 text-gray-600" />
+                                    )}
+                                </div>
+                            </button>
+
+                            {isHowItWorksOpen && (
+                                <div className="px-6 pb-6">
+                                    <div className="space-y-4">
+                                        <div className="flex gap-4">
+                                            <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center text-white font-black">
+                                                1
+                                            </div>
+                                            <div className="flex-1">
+                                                <h3 className="font-bold text-gray-900 mb-2">Select Your Date</h3>
+                                                <p className="text-sm text-gray-700 leading-relaxed">
+                                                    Choose your preferred date and number of guests. Our calendar shows real-time availability.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-4">
+                                            <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center text-white font-black">
+                                                2
+                                            </div>
+                                            <div className="flex-1">
+                                                <h3 className="font-bold text-gray-900 mb-2">Book & Confirm</h3>
+                                                <p className="text-sm text-gray-700 leading-relaxed">
+                                                    Complete your booking securely online. You'll receive instant confirmation via email.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-4">
+                                            <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center text-white font-black">
+                                                3
+                                            </div>
+                                            <div className="flex-1">
+                                                <h3 className="font-bold text-gray-900 mb-2">Get Ready</h3>
+                                                <p className="text-sm text-gray-700 leading-relaxed">
+                                                    We'll send you all the details including pickup time, meeting point, and what to bring.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-4">
+                                            <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center text-white font-black">
+                                                4
+                                            </div>
+                                            <div className="flex-1">
+                                                <h3 className="font-bold text-gray-900 mb-2">Enjoy Your Adventure</h3>
+                                                <p className="text-sm text-gray-700 leading-relaxed">
+                                                    Our professional team will ensure you have an unforgettable desert safari experience!
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             )}
                         </div>
-                        <ExcursionDetailPageCommonSection />
+
+                        {/* Important Information - Accordion */}
+                        <div className="bg-white rounded-2xl shadow-lg border-2 border-amber-100 overflow-hidden">
+                            <button
+                                onClick={() => setIsImportantInfoOpen(!isImportantInfoOpen)}
+                                className="w-full p-6 flex items-center justify-between hover:bg-amber-50 transition-colors"
+                            >
+                                <h2 className="text-xl sm:text-2xl font-black text-gray-900 flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-red-400 to-red-500 rounded-xl flex items-center justify-center">
+                                        <AlertCircle className="w-6 h-6 text-white" />
+                                    </div>
+                                    <span>Important Information</span>
+                                </h2>
+                                <div className="flex-shrink-0 ml-4">
+                                    {isImportantInfoOpen ? (
+                                        <ChevronUp className="w-6 h-6 text-gray-600" />
+                                    ) : (
+                                        <ChevronDown className="w-6 h-6 text-gray-600" />
+                                    )}
+                                </div>
+                            </button>
+
+                            {isImportantInfoOpen && (
+                                <div className="px-6 pb-6">
+                                    <div className="space-y-3">
+                                        <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-xl border-2 border-amber-200">
+                                            <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                                            <div className="flex-1">
+                                                <p className="text-sm text-gray-800 font-semibold mb-1">Weather Dependent</p>
+                                                <p className="text-xs text-gray-700">
+                                                    Tours may be rescheduled due to extreme weather conditions for safety reasons.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-xl border-2 border-amber-200">
+                                            <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                                            <div className="flex-1">
+                                                <p className="text-sm text-gray-800 font-semibold mb-1">Dress Code</p>
+                                                <p className="text-xs text-gray-700">
+                                                    Wear comfortable, casual clothing suitable for desert conditions. Closed-toe shoes recommended.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-xl border-2 border-amber-200">
+                                            <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                                            <div className="flex-1">
+                                                <p className="text-sm text-gray-800 font-semibold mb-1">Health & Safety</p>
+                                                <p className="text-xs text-gray-700">
+                                                    Not recommended for pregnant women or people with back/heart problems. Please inform us of any medical conditions.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-xl border-2 border-amber-200">
+                                            <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                                            <div className="flex-1">
+                                                <p className="text-sm text-gray-800 font-semibold mb-1">Cancellation Policy</p>
+                                                <p className="text-xs text-gray-700">
+                                                    Free cancellation up to 24 hours before the tour. Full refund for cancellations within this period.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-xl border-2 border-amber-200">
+                                            <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                                            <div className="flex-1">
+                                                <p className="text-sm text-gray-800 font-semibold mb-1">What to Bring</p>
+                                                <p className="text-xs text-gray-700">
+                                                    Sunglasses, sunscreen, camera, and a light jacket for evening tours.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Why Book With Us - Accordion */}
+                        <div className="bg-white rounded-2xl shadow-lg border-2 border-amber-100 overflow-hidden">
+                            <button
+                                onClick={() => setIsWhyBookOpen(!isWhyBookOpen)}
+                                className="w-full p-6 flex items-center justify-between hover:bg-amber-50 transition-colors"
+                            >
+                                <h2 className="text-xl sm:text-2xl font-black text-gray-900 flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl flex items-center justify-center">
+                                        <Award className="w-6 h-6 text-white" />
+                                    </div>
+                                    <span>Why Book With Us</span>
+                                </h2>
+                                <div className="flex-shrink-0 ml-4">
+                                    {isWhyBookOpen ? (
+                                        <ChevronUp className="w-6 h-6 text-gray-600" />
+                                    ) : (
+                                        <ChevronDown className="w-6 h-6 text-gray-600" />
+                                    )}
+                                </div>
+                            </button>
+
+                            {isWhyBookOpen && (
+                                <div className="px-6 pb-6">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200">
+                                            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                <Check className="w-5 h-5 text-white" />
+                                            </div>
+                                            <div>
+                                                <h3 className="font-bold text-gray-900 mb-1 text-sm">Best Price Guarantee</h3>
+                                                <p className="text-xs text-gray-700">
+                                                    We offer the most competitive prices in Dubai with no hidden fees.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200">
+                                            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                <Check className="w-5 h-5 text-white" />
+                                            </div>
+                                            <div>
+                                                <h3 className="font-bold text-gray-900 mb-1 text-sm">Expert Guides</h3>
+                                                <p className="text-xs text-gray-700">
+                                                    Professional, licensed drivers and guides with years of experience.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200">
+                                            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                <Check className="w-5 h-5 text-white" />
+                                            </div>
+                                            <div>
+                                                <h3 className="font-bold text-gray-900 mb-1 text-sm">24/7 Support</h3>
+                                                <p className="text-xs text-gray-700">
+                                                    Round-the-clock customer support for any questions or concerns.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200">
+                                            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                <Check className="w-5 h-5 text-white" />
+                                            </div>
+                                            <div>
+                                                <h3 className="font-bold text-gray-900 mb-1 text-sm">Flexible Booking</h3>
+                                                <p className="text-xs text-gray-700">
+                                                    Easy online booking with flexible cancellation policy.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200">
+                                            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                <Check className="w-5 h-5 text-white" />
+                                            </div>
+                                            <div>
+                                                <h3 className="font-bold text-gray-900 mb-1 text-sm">Safety First</h3>
+                                                <p className="text-xs text-gray-700">
+                                                    All vehicles are regularly maintained and fully insured.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200">
+                                            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                <Check className="w-5 h-5 text-white" />
+                                            </div>
+                                            <div>
+                                                <h3 className="font-bold text-gray-900 mb-1 text-sm">5-Star Reviews</h3>
+                                                <p className="text-xs text-gray-700">
+                                                    Thousands of satisfied customers with excellent ratings.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* FAQ - Accordion */}
+                        <div className="bg-white rounded-2xl shadow-lg border-2 border-amber-100 overflow-hidden">
+                            <button
+                                onClick={() => setIsFaqOpen(!isFaqOpen)}
+                                className="w-full p-6 flex items-center justify-between hover:bg-amber-50 transition-colors"
+                            >
+                                <h2 className="text-xl sm:text-2xl font-black text-gray-900 flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-indigo-400 to-indigo-500 rounded-xl flex items-center justify-center">
+                                        <HelpCircle className="w-6 h-6 text-white" />
+                                    </div>
+                                    <span>Frequently Asked Questions</span>
+                                </h2>
+                                <div className="flex-shrink-0 ml-4">
+                                    {isFaqOpen ? (
+                                        <ChevronUp className="w-6 h-6 text-gray-600" />
+                                    ) : (
+                                        <ChevronDown className="w-6 h-6 text-gray-600" />
+                                    )}
+                                </div>
+                            </button>
+
+                            {isFaqOpen && (
+                                <div className="px-6 pb-6">
+                                    <div className="space-y-4">
+                                        <div className="border-b border-gray-200 pb-4">
+                                            <h3 className="font-bold text-gray-900 mb-2 text-sm">What should I wear?</h3>
+                                            <p className="text-sm text-gray-700 leading-relaxed">
+                                                Wear comfortable, casual clothing. We recommend light, breathable fabrics and closed-toe shoes. Bring a light jacket for evening tours as it can get cooler in the desert.
+                                            </p>
+                                        </div>
+                                        <div className="border-b border-gray-200 pb-4">
+                                            <h3 className="font-bold text-gray-900 mb-2 text-sm">Is hotel pickup included?</h3>
+                                            <p className="text-sm text-gray-700 leading-relaxed">
+                                                Yes, we offer complimentary pickup and drop-off from most hotels in Dubai. We'll confirm your exact pickup time after booking.
+                                            </p>
+                                        </div>
+                                        <div className="border-b border-gray-200 pb-4">
+                                            <h3 className="font-bold text-gray-900 mb-2 text-sm">Is the tour suitable for children?</h3>
+                                            <p className="text-sm text-gray-700 leading-relaxed">
+                                                Yes, children of all ages are welcome. However, dune bashing may not be suitable for very young children or those with motion sickness. Child seats are available upon request.
+                                            </p>
+                                        </div>
+                                        <div className="border-b border-gray-200 pb-4">
+                                            <h3 className="font-bold text-gray-900 mb-2 text-sm">What if I have dietary restrictions?</h3>
+                                            <p className="text-sm text-gray-700 leading-relaxed">
+                                                We can accommodate most dietary requirements including vegetarian, vegan, halal, and gluten-free options. Please inform us of any restrictions when booking.
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <h3 className="font-bold text-gray-900 mb-2 text-sm">Can I take photos?</h3>
+                                            <p className="text-sm text-gray-700 leading-relaxed">
+                                                Absolutely! Bring your camera or smartphone. The desert offers stunning photo opportunities, especially during sunset. Our guides can also take photos for you.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
 
                     {/* Right Column - Booking */}
@@ -619,6 +959,6 @@ export default function ItemDetailpage() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>  
     );
 }
