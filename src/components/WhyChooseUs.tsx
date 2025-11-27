@@ -151,7 +151,7 @@ export default function WhyChooseUs() {
                             Book your dream desert safari today and create unforgettable memories under the golden Arabian sun
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
-                            <Link to={'/excursions'} className="w-full sm:w-auto">
+                            <Link to={'/safaris'} className="w-full sm:w-auto">
                                 <button className="group w-full sm:w-auto bg-white text-amber-700 hover:bg-gray-50 font-bold px-8 sm:px-10 py-4 text-base sm:text-lg rounded-full transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 flex items-center justify-center gap-2">
                                     <span>Explore Safaris</span>
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

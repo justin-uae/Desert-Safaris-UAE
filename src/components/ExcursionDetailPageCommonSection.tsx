@@ -213,7 +213,7 @@ const ExcursionDetailPageCommonSection = () => {
                             Chat on WhatsApp
                         </a>
                         <a
-                            href="mailto:info@desertsafarisuae.com"
+                            href="mailto:info@safaris.ae"
                             className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 rounded-lg transition-colors text-sm sm:text-base"
                         >
                             <Mail className="w-5 h-5" />

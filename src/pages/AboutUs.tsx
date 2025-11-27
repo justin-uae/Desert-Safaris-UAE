@@ -203,7 +203,7 @@ export default function AboutPage() {
                             Start your next Arabian adventure today and discover why thousands of travelers choose us for their desert safari experience
                         </p>
                         <Link
-                            to="/excursions"
+                            to="/safaris"
                             className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-white text-amber-700 rounded-full font-black text-lg sm:text-xl hover:shadow-2xl transform hover:scale-105 transition-all"
                         >
                             Browse Desert Safaris <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -232,7 +232,7 @@ export default function AboutPage() {
                                 </svg>
                             </div>
                             <h4 className="font-black text-base sm:text-lg text-gray-900 mb-2">Email Us</h4>
-                            <p className="text-sm sm:text-base text-amber-600 font-bold break-all">info@desertsafarisuae.com</p>
+                            <p className="text-sm sm:text-base text-amber-600 font-bold break-all">info@safaris.ae</p>
                         </div>
 
                         <div className="p-7 sm:p-8 bg-white rounded-2xl shadow-lg border-2 border-amber-200 hover:shadow-xl transition-all hover:border-amber-300 text-center">

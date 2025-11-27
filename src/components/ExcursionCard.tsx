@@ -23,7 +23,7 @@ export const ExcursionCard = ({ excursion }: { excursion: Product }) => {
 
     const goToDetail = (productId: string) => {
         const numericId = productId.split('/').pop() || productId;
-        navigate(`/excursion/${numericId}`);
+        navigate(`/safaris/${numericId}`);
     };
 
     const discountPercentage = Math.round(((60) / ((excursion.price) + 60)) * 100);

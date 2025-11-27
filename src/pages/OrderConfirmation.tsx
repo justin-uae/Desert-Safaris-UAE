@@ -33,7 +33,7 @@ export default function OrderConfirmation() {
 
         <Link
           className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-8 py-3 rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] transition-all"
-          to={"/excursions"}
+          to={"/safaris"}
         >
           Continue Exploring <ArrowRight className="w-5 h-5 ml-2" />
         </Link>

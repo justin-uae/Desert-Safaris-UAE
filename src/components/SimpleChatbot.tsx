@@ -11,39 +11,39 @@ interface Message {
 // FAQ Database with keywords and answers
 const FAQ_DATABASE: Record<string, string> = {
     'hello': 'Hello! 👋 Welcome to Dubai Excursions. How can I help you today?',
-    'hi': 'Hi there! 👋 I can help you with information about our Dubai tours and excursions.',
-    'price': '💰 **Tour Pricing**\n\n• Burj Khalifa: from **AED 150**\n• Desert Safari: from **AED 280**\n• Marina Cruise: from **AED 250**\n• Abu Dhabi Tour: from **AED 350**\n\n[View All Tours](/excursions)',
-    'cost': '💰 Our excursions range from **AED 150 to AED 900** depending on the tour.\n\n[View All Tours](/excursions)',
-    'booking': '📱 **Easy Booking Process**\n\n1️⃣ Browse our excursions\n2️⃣ Select your tour\n3️⃣ Choose date & guests\n4️⃣ Add to cart & checkout\n\n✅ Secure payment\n✅ Instant confirmation\n\n[Start Booking](/excursions)',
-    'book': '📝 You can book directly on our website!\n\n[Browse Excursions](/excursions)\n\nOr contact us on WhatsApp for assistance! 💬',
-    'burj khalifa': '🏢 **Burj Khalifa At The Top**\n\n✨ World\'s tallest building!\n\n**Includes:**\n• Skip-the-line access\n• Floors 124 & 125\n• Panoramic views\n• Audio guide\n\n💵 From **AED 150** per person\n\n[Book Now](/excursions)',
-    'burj': '🏢 **Burj Khalifa** - Skip-the-line access to floors 124 & 125 with stunning Dubai views.\n\n💵 From **AED 150**\n\n[View Details](/excursions)',
-    'desert safari': '🏜️ **Desert Safari Adventure**\n\n🌟 Most popular tour!\n\n**Includes:**\n• Thrilling dune bashing\n• Camel riding 🐪\n• Sandboarding\n• BBQ dinner under stars\n• Live entertainment\n• Henna painting\n\n💵 From **AED 280** per person\n\n[Book Now](/excursions)',
-    'desert': '🏜️ **Desert Safari** - Our most popular tour!\n\nIncludes dune bashing, camel riding, BBQ dinner & entertainment.\n\n💵 From **AED 280**\n\n[View Details](/excursions)',
-    'safari': '🏜️ Desert Safari includes dune bashing, camel rides, BBQ dinner & traditional shows.\n\n💵 From **AED 280**!\n\n[Book Now](/excursions)',
-    'marina': '🚢 **Dubai Marina Cruise**\n\n⛵ Luxury dinner experience!\n\n**Includes:**\n• 2-hour cruise\n• International buffet\n• Live entertainment\n• Stunning views\n• Hotel pickup\n\n💵 From **AED 250** per person\n\n[Book Now](/excursions)',
-    'cruise': '⛵ **Dubai Marina Cruise** - 2-hour luxury experience with buffet dinner & entertainment.\n\n💵 From **AED 250**\n\n[View Details](/excursions)',
-    'abu dhabi': '🕌 **Abu Dhabi City Tour**\n\n🎯 Full day experience!\n\n**Highlights:**\n• Sheikh Zayed Grand Mosque\n• Emirates Palace\n• Heritage Village\n• Corniche\n• Professional guide\n• Lunch included\n\n💵 From **AED 350** per person\n\n[Book Now](/excursions)',
+    'hi': 'Hi there! 👋 I can help you with information about our Dubai tours and safaris.',
+    'price': '💰 **Tour Pricing**\n\n• Burj Khalifa: from **AED 150**\n• Desert Safari: from **AED 280**\n• Marina Cruise: from **AED 250**\n• Abu Dhabi Tour: from **AED 350**\n\n[View All Tours](/safaris)',
+    'cost': '💰 Our safaris range from **AED 150 to AED 900** depending on the tour.\n\n[View All Tours](/safaris)',
+    'booking': '📱 **Easy Booking Process**\n\n1️⃣ Browse our safaris\n2️⃣ Select your tour\n3️⃣ Choose date & guests\n4️⃣ Add to cart & checkout\n\n✅ Secure payment\n✅ Instant confirmation\n\n[Start Booking](/safaris)',
+    'book': '📝 You can book directly on our website!\n\n[Browse Excursions](/safaris)\n\nOr contact us on WhatsApp for assistance! 💬',
+    'burj khalifa': '🏢 **Burj Khalifa At The Top**\n\n✨ World\'s tallest building!\n\n**Includes:**\n• Skip-the-line access\n• Floors 124 & 125\n• Panoramic views\n• Audio guide\n\n💵 From **AED 150** per person\n\n[Book Now](/safaris)',
+    'burj': '🏢 **Burj Khalifa** - Skip-the-line access to floors 124 & 125 with stunning Dubai views.\n\n💵 From **AED 150**\n\n[View Details](/safaris)',
+    'desert safari': '🏜️ **Desert Safari Adventure**\n\n🌟 Most popular tour!\n\n**Includes:**\n• Thrilling dune bashing\n• Camel riding 🐪\n• Sandboarding\n• BBQ dinner under stars\n• Live entertainment\n• Henna painting\n\n💵 From **AED 280** per person\n\n[Book Now](/safaris)',
+    'desert': '🏜️ **Desert Safari** - Our most popular tour!\n\nIncludes dune bashing, camel riding, BBQ dinner & entertainment.\n\n💵 From **AED 280**\n\n[View Details](/safaris)',
+    'safari': '🏜️ Desert Safari includes dune bashing, camel rides, BBQ dinner & traditional shows.\n\n💵 From **AED 280**!\n\n[Book Now](/safaris)',
+    'marina': '🚢 **Dubai Marina Cruise**\n\n⛵ Luxury dinner experience!\n\n**Includes:**\n• 2-hour cruise\n• International buffet\n• Live entertainment\n• Stunning views\n• Hotel pickup\n\n💵 From **AED 250** per person\n\n[Book Now](/safaris)',
+    'cruise': '⛵ **Dubai Marina Cruise** - 2-hour luxury experience with buffet dinner & entertainment.\n\n💵 From **AED 250**\n\n[View Details](/safaris)',
+    'abu dhabi': '🕌 **Abu Dhabi City Tour**\n\n🎯 Full day experience!\n\n**Highlights:**\n• Sheikh Zayed Grand Mosque\n• Emirates Palace\n• Heritage Village\n• Corniche\n• Professional guide\n• Lunch included\n\n💵 From **AED 350** per person\n\n[Book Now](/safaris)',
     'pickup': '🚗 **Free Hotel Pickup**\n\n✅ Yes! We provide complimentary hotel pickup & drop-off for most tours within Dubai.\n\n⏰ Exact pickup time confirmed after booking.',
     'transport': '🚗 We provide **free hotel pickup & drop-off** in Dubai for most tours.\n\n✅ Professional drivers\n✅ Comfortable AC vehicles',
     'cancel': '📋 **Cancellation Policy**\n\n✅ Free cancellation up to **24 hours** before tour\n✅ Full refund if cancelled 24+ hours\n✅ 50% refund if cancelled 12-24 hours\n❌ No refund if cancelled less than 12 hours\n\nContact us for special circumstances!',
     'refund': '💵 We offer **full refunds** for cancellations made 24+ hours before your tour.\n\nSee our cancellation policy for details.',
-    'contact': '📞 **Contact Us**\n\n• **WhatsApp:** +971 50 123 4567\n• **Email:** info@excursionsdubai.ae\n• **Phone:** +971 54561 3397\n\n🕐 Available **24/7** to assist you!\n\n[Contact us Now](/contact)',
+    'contact': '📞 **Contact Us**\n\n• **WhatsApp:** +971 50 123 4567\n• **Email:** info@safaris.ae\n• **Phone:** +971 54561 3397\n\n🕐 Available **24/7** to assist you!\n\n[Contact us Now](/contact)',
     'whatsapp': '💬 Chat with us on **WhatsApp** at **+971 50 123 4567** for instant assistance!\n\nClick the green WhatsApp button below! 👇',
-    'email': '📧 Email us at **info@excursionsdubai.ae**\n\nWe\'ll respond within 24 hours!',
+    'email': '📧 Email us at **info@safaris.ae**\n\nWe\'ll respond within 24 hours!',
     'phone': '📞 Call us at **+971 54561 3397** for immediate assistance!',
     'group': '👥 **Group Discounts**\n\n💰 Special rates for groups!\n\n• 10+ people: **10% off**\n• 20+ people: **15% off**\n• 50+ people: **20% off**\n\nContact us via WhatsApp for custom packages! 💬',
     'discount': '🎉 We offer **group discounts** and special promotions!\n\nContact us via WhatsApp for the best deals! 💬',
     'duration': '⏰ **Tour Durations**\n\n• Burj Khalifa: **1-2 hours**\n• Desert Safari: **6 hours**\n• Marina Cruise: **2 hours**\n• Abu Dhabi Tour: **8-9 hours**\n• Dubai City Tour: **4-5 hours**',
     'time': '⏰ Tour times vary by excursion. Most tours include flexible pickup times.\n\nCheck individual tour pages for specific timings!',
-    'what included': '📦 **What\'s Included**\n\nGenerally includes:\n\n✅ Hotel pickup/dropoff\n✅ Professional guide\n✅ Entry tickets\n✅ Meals (where applicable)\n✅ Activities as listed\n\n[Browse Excursions](/excursions)',
+    'what included': '📦 **What\'s Included**\n\nGenerally includes:\n\n✅ Hotel pickup/dropoff\n✅ Professional guide\n✅ Entry tickets\n✅ Meals (where applicable)\n✅ Activities as listed\n\n[Browse Excursions](/safaris)',
     'children': '👶 **Children Policy**\n\n✅ Most tours welcome children\n💵 Discounted rates (2-12 years)\n🆓 Free for infants (under 2)\n⚠️ Some tours have age restrictions\n\nCheck specific tour requirements!',
     'kids': '👶 We welcome families! Most tours offer **discounted rates** for children aged 2-12.\n\n🆓 Infants under 2 are usually free!',
     'payment': '💳 **Payment Methods**\n\n✅ Credit/Debit Cards\n✅ Visa & Mastercard\n✅ Online Banking\n✅ Digital Wallets\n✅ Secure checkout\n\n🔒 All payments are **100% secure**!',
-    'hours': '🕐 We\'re available to help you **24/7**!\n\nBrowse our excursions anytime or contact us via WhatsApp for instant assistance! 💬',
+    'hours': '🕐 We\'re available to help you **24/7**!\n\nBrowse our safaris anytime or contact us via WhatsApp for instant assistance! 💬',
     'weather': '☀️ **Dubai Weather**\n\n🌡️ Best time: **Oct-April** (cooler)\n🔥 Summer (May-Sep): Very hot\n✅ Tours run year-round\n❄️ Indoor activities available\n\nDesert safaris are best in cooler months!',
     'best time': '📅 Best time to visit Dubai is **October to April** when weather is pleasant.\n\nHowever, our tours operate year-round with AC vehicles! ❄️',
-    'thank': 'You\'re welcome! 😊\n\nIs there anything else I can help you with?\n\n[Browse Excursions](/excursions)',
+    'thank': 'You\'re welcome! 😊\n\nIs there anything else I can help you with?\n\n[Browse Excursions](/safaris)',
     'thanks': 'Happy to help! 🌟\n\nEnjoy planning your Dubai adventure! 🎉',
 };
 
@@ -192,7 +192,7 @@ Here's what I can help you with:
 
 **💰 Pricing** - Tour costs & packages
 **🎫 Booking** - How to reserve
-**🏜️ Tours** - All excursions
+**🏜️ Tours** - All safaris
 **🚗 Pickup** - Transportation
 **📞 Contact** - Get in touch
 

@@ -130,7 +130,7 @@ export default function ProfilePage() {
 
                     {/* Browse Tours */}
                     <Link
-                        to="/excursions"
+                        to="/safaris"
                         className="group bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden border-2 border-amber-100 hover:shadow-2xl hover:border-amber-300 transition-all duration-300 p-6 sm:p-8"
                     >
                         <div className="flex flex-col items-center text-center gap-4">

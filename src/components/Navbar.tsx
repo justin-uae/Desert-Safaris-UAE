@@ -71,13 +71,13 @@ export default function Navbar() {
                             </div>
                             <div className="hidden md:flex items-center gap-2">
                                 <Mail className="w-3.5 h-3.5" />
-                                <span className="font-medium">info@desertsafarisuae.com</span>
+                                <span className="font-medium">info@safaris.ae</span>
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
                             <MapPin className="w-3.5 h-3.5" />
-                            <span className="hidden sm:inline font-medium">Dubai, UAE</span>
-                            <span className="sm:hidden font-medium">UAE</span>
+                            <span className="hidden sm:inline font-medium">Hor Al Anz Building 101, Dubai, UAE</span>
+                            <span className="sm:hidden font-medium">Dubai, UAE</span>
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@ export default function Navbar() {
                                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-600 to-orange-600 group-hover:w-full transition-all duration-300"></span>
                             </Link>
                             <Link
-                                to="/excursions"
+                                to="/safaris"
                                 className="text-gray-700 hover:text-amber-600 font-semibold transition-colors relative group"
                             >
                                 Desert Safaris
@@ -250,7 +250,7 @@ export default function Navbar() {
                                     Home
                                 </Link>
                                 <Link
-                                    to="/excursions"
+                                    to="/safaris"
                                     className="text-gray-700 hover:bg-amber-50 hover:text-amber-700 font-semibold py-3 px-4 rounded-lg transition-colors"
                                     onClick={() => setIsMenuOpen(false)}
                                 >

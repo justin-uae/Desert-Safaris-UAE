@@ -36,7 +36,7 @@ const ViewAllExcursion = () => {
     const [selectedLocation, setSelectedLocation] = useState(locationFromQuery);
     const [sortBy, setSortBy] = useState('rating');
 
-    // Get unique locations from excursions
+    // Get unique locations from safaris
     const uniqueLocations = Array.from(
         new Set(excursions.map((exc: Product) => exc.location).filter(Boolean))
     ).map((location) => ({
@@ -44,7 +44,7 @@ const ViewAllExcursion = () => {
         label: location,
     }));
 
-    // Fetch excursions on mount
+    // Fetch safaris on mount
     useEffect(() => {
         dispatch(fetchAllExcursions());
     }, [dispatch]);
@@ -92,7 +92,7 @@ const ViewAllExcursion = () => {
         setSearchQuery('');
         setSelectedLocation('');
         setSortBy('rating');
-        navigate('/excursions');
+        navigate('/safaris');
     };
 
     const activeFiltersCount = () => {

@@ -248,7 +248,7 @@ export const CartPageComplete: React.FC = () => {
                     <p className="text-gray-600 mb-8 text-lg font-medium">Start your desert adventure by browsing our safaris!</p>
                     <Link
                         className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 text-white font-bold px-8 py-4 rounded-full transition-all shadow-xl hover:shadow-2xl transform hover:scale-105"
-                        to={"/excursions"}
+                        to={"/safaris"}
                     >
                         <span>Explore Desert Safaris</span>
                         <ArrowRight className="w-5 h-5" />
@@ -367,7 +367,7 @@ export const CartPageComplete: React.FC = () => {
                             ))}
 
                             <Link
-                                to="/excursions"
+                                to="/safaris"
                                 className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-bold mt-6 transition-colors"
                             >
                                 ← Continue Shopping

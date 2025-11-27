@@ -137,7 +137,7 @@ export default function BookingsPage() {
                             Start your desert adventure today! Explore our curated collection of amazing safari experiences.
                         </p>
                         <Link
-                            to={'/excursions'}
+                            to={'/safaris'}
                             className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 text-white font-black px-8 sm:px-10 py-4 sm:py-5 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
                         >
                             <MapPin className="w-5 h-5" />

@@ -103,7 +103,7 @@ export default function ItemDetailpage() {
         const phoneNumber = `${import.meta.env.VITE_CONTACT_NUMBER}`;
         console.log("phoneNumber", phoneNumber);
 
-        const message = `Hi! I'm interested in booking this excursion:
+        const message = `Hi! I'm interested in booking this safaris:
 
     📍 *${excursion.title}*
     ${excursion.location ? `📌 Location: ${excursion.location}` : ''}
@@ -267,7 +267,7 @@ export default function ItemDetailpage() {
                     <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 overflow-x-auto whitespace-nowrap">
                         <Link to="/" className="hover:text-amber-600 font-medium transition-colors">Home</Link>
                         <span className="text-amber-400">→</span>
-                        <Link to="/excursions" className="hover:text-amber-600 font-medium transition-colors">Desert Safaris</Link>
+                        <Link to="/safaris" className="hover:text-amber-600 font-medium transition-colors">Desert Safaris</Link>
                         <span className="text-amber-400">→</span>
                         <span className="text-gray-900 font-semibold truncate">{excursion.title}</span>
                     </div>

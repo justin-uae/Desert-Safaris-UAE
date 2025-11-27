@@ -125,7 +125,7 @@ export default function HomepageBanner() {
     useEffect(() => {
         if (selectedLocation !== '') {
             console.log("selectedLocation", selectedLocation);
-            navigate(`/excursions?location=${encodeURIComponent(selectedLocation)}`);
+            navigate(`/safaris?location=${encodeURIComponent(selectedLocation)}`);
         }
     }, [selectedLocation, navigate])
 
@@ -266,7 +266,7 @@ export default function HomepageBanner() {
                                     </p>
                                 </div>
 
-                                {/* <Link to={"/excursions"}>
+                                {/* <Link to={"/safaris"}>
                                     <button className="group relative bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 text-white font-bold px-6 py-3 sm:px-8 sm:py-3.5 md:px-10 md:py-4 rounded-full transition-all transform hover:scale-105 shadow-2xl text-sm sm:text-base md:text-lg overflow-hidden">
                                         <span className="relative z-10 flex items-center gap-2">
                                             Explore Desert Adventures

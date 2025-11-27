@@ -15,7 +15,7 @@ export default function PopularTours() {
     const dispatch = useAppDispatch();
     const { products: tours, loading } = useAppSelector((state) => state.products);
 
-    // Fetch excursions on mount
+    // Fetch safaris on mount
     useEffect(() => {
         dispatch(fetchAllExcursions());
     }, [dispatch]);
@@ -27,7 +27,7 @@ export default function PopularTours() {
 
     const goToDetail = (productId: string) => {
         const numericId = productId?.split('/').pop() || productId;
-        navigate(`/excursion/${numericId}`);
+        navigate(`/safaris/${numericId}`);
     };
 
     const scroll = (direction: 'left' | 'right') => {
@@ -170,7 +170,7 @@ export default function PopularTours() {
 
                 {/* View All Button */}
                 <div className="text-center mt-10 sm:mt-12 md:mt-14">
-                    <Link to={"/excursions"}>
+                    <Link to={"/safaris"}>
                         <button className="group relative bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 text-white font-bold px-8 sm:px-10 md:px-12 py-3 sm:py-3.5 md:py-4 text-sm sm:text-base md:text-lg rounded-full transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl overflow-hidden">
                             <span className="relative z-10 flex items-center justify-center gap-2">
                                 Explore All Desert Safaris

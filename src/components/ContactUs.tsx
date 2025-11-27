@@ -231,8 +231,8 @@ function ContactForm() {
                                     </div>
                                     <div className="min-w-0">
                                         <h3 className="font-black text-base text-gray-900 mb-1">Email</h3>
-                                        <a href="mailto:info@desertsafarisuae.com" className="text-sm text-amber-700 hover:text-amber-800 transition-colors break-all font-bold">
-                                            info@desertsafarisuae.com
+                                        <a href="mailto:info@safaris.ae" className="text-sm text-amber-700 hover:text-amber-800 transition-colors break-all font-bold">
+                                            info@safaris.ae
                                         </a>
                                     </div>
                                 </div>

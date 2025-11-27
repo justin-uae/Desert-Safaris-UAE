@@ -6,7 +6,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 export default function Footer() {
   const quickLinks = [
     { name: "About", href: "/about" },
-    { name: "Excursions", href: "/excursions" },
+    { name: "Desert Safaris", href: "/safaris" },
     { name: "Contact", href: "/contact" }
   ];
 
@@ -51,8 +51,8 @@ export default function Footer() {
                 <div className="bg-gradient-to-br from-amber-500 to-orange-500 p-1.5 rounded-lg group-hover:scale-110 transition-transform">
                   <Mail className="w-4 h-4 text-white flex-shrink-0" />
                 </div>
-                <a href="mailto:info@desertsafarisuae.com" className="text-sm hover:text-amber-400 transition-colors break-all sm:break-normal font-medium">
-                  info@desertsafarisuae.com
+                <a href="mailto:info@safaris.ae" className="text-sm hover:text-amber-400 transition-colors break-all sm:break-normal font-medium">
+                  info@safaris.ae
                 </a>
               </div>
             </div>
