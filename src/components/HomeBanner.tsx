@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { getMediaUrls } from '../services/shopifyService';
 import ScopedSandParticles from './SandParticles';
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { optimizeShopifyImage } from '../helper/optimizeImage';
 
 export default function HomepageBanner() {
     const [selectedLocation, setSelectedLocation] = useState('');
@@ -180,7 +181,17 @@ export default function HomepageBanner() {
                         ) : (
                             <>
                                 <LazyLoadImage
-                                    src={`${currentBannerImage}`}
+                                    src={optimizeShopifyImage(currentBannerImage, 1600)}
+                                    srcSet={`
+                                    ${optimizeShopifyImage(currentBannerImage, 600)} 600w,
+                                    ${optimizeShopifyImage(currentBannerImage, 900)} 900w,
+                                    ${optimizeShopifyImage(currentBannerImage, 1200)} 1200w,
+                                    ${optimizeShopifyImage(currentBannerImage, 1600)} 1600w
+                                    `}
+                                    sizes="(max-width: 640px) 600px,
+           (max-width: 1024px) 900px,
+           1200px"
+                                    loading='lazy'
                                     alt="Desert Safari Banner"
                                     className="w-full h-full object-cover transition-opacity duration-500"
                                 // onError={(e) => {
@@ -292,7 +303,7 @@ export default function HomepageBanner() {
                                 </div>
                                 <div className="flex-1 text-left">
                                     <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Destination</p>
-                                    <span className={`${selectedLocation ? "text-gray-900 font-bold" : "text-gray-400 font-medium"} text-base`}>
+                                    <span className={`${selectedLocation ? "text-black-900 font-bold" : "text-black-400 font-medium"} text-base`}>
                                         {selectedLocation || "Choose Your Adventure"}
                                     </span>
                                 </div>
@@ -303,7 +314,7 @@ export default function HomepageBanner() {
                                 <div className="absolute top-full mt-3 w-full bg-white rounded-2xl shadow-2xl p-5 max-h-96 overflow-y-auto z-50 border-2 border-amber-100">
                                     <div className="mb-4">
                                         <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wide">Select Location</h3>
-                                        <p className="text-xs text-gray-500 mt-1">Discover amazing desert experiences</p>
+                                        <p className="text-xs text-black-500 mt-1">Discover amazing desert experiences</p>
                                     </div>
                                     {loading ? (
                                         <div className="text-center py-12 text-gray-500">
@@ -323,7 +334,7 @@ export default function HomepageBanner() {
                                                 >
                                                     <div className="w-full h-24 rounded-lg overflow-hidden shadow-md">
                                                         <LazyLoadImage
-                                                            src={city?.images?.edges?.[0]?.node?.url || city?.image || 'https://via.placeholder.com/400x300'}
+                                                            src={optimizeShopifyImage(city?.images?.edges?.[0]?.node?.url || city?.image, 400)}
                                                             alt={city.location}
                                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                                                         />
@@ -356,12 +367,14 @@ export default function HomepageBanner() {
                             <div className="hidden sm:flex gap-2">
                                 <button
                                     onClick={() => scroll('left')}
+                                    aria-label='Left Button'
                                     className="bg-white border-2 border-amber-200 rounded-full p-3 hover:border-amber-400 hover:bg-amber-50 transition-all shadow-md hover:shadow-lg group"
                                 >
                                     <ChevronLeft className="w-5 h-5 text-amber-600 group-hover:text-amber-700" />
                                 </button>
                                 <button
                                     onClick={() => scroll('right')}
+                                    aria-label='Right Button'
                                     className="bg-white border-2 border-amber-200 rounded-full p-3 hover:border-amber-400 hover:bg-amber-50 transition-all shadow-md hover:shadow-lg group"
                                 >
                                     <ChevronRight className="w-5 h-5 text-amber-600 group-hover:text-amber-700" />
@@ -387,7 +400,7 @@ export default function HomepageBanner() {
                                         className="relative min-w-[280px] md:min-w-[320px] lg:min-w-[380px] rounded-2xl overflow-hidden shadow-xl group cursor-pointer h-72 hover:shadow-2xl transition-all transform hover:scale-[1.02]"
                                     >
                                         <LazyLoadImage
-                                            src={city?.images?.edges?.[0]?.node?.url || city?.image || 'https://via.placeholder.com/400x300'}
+                                            src={optimizeShopifyImage(city?.images?.edges?.[0]?.node?.url || city?.image, 400)}
                                             alt={city.title}
                                             loading='lazy'
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"

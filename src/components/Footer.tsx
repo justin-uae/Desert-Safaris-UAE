@@ -78,12 +78,12 @@ export default function Footer() {
           <p className="text-center text-sm text-gray-400 font-medium">
             © 2025{' '}
             <a
-              href="https://www.Desertsafarisuae.ae/"
+              href="https://www.safaris.ae/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-amber-500 hover:text-amber-400 font-bold transition-colors"
             >
-              Desertsafarisuae.ae
+              Safarisuae.ae
             </a>{' '}
             is a trading style of Jetset Worldwide Travel & Tourism. All rights reserved.
           </p>

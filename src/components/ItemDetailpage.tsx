@@ -4,10 +4,11 @@ import { MapPin, Clock, Users, Calendar, Star, ChevronLeft, ChevronRight, CheckC
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { fetchExcursionById } from '../slices/productsSlice';
 import { addToCartAsync } from '../slices/cartSlice';
-import { LazyImage } from './LazyImage';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { BookingSkeleton, DetailsSkeleton, ImageGallerySkeleton } from './Skeletons/ItemDetailPage';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useCurrency } from '../hooks/useCurrency';
+import { optimizeShopifyImage } from '../helper/optimizeImage';
 
 export default function ItemDetailpage() {
     const { id } = useParams<{ id: string }>();
@@ -281,8 +282,8 @@ export default function ItemDetailpage() {
                         {/* Image Gallery */}
                         <div className="relative">
                             <div className="relative aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-amber-100">
-                                <LazyImage
-                                    src={excursion.images[currentImageIndex]}
+                                <LazyLoadImage
+                                    src={optimizeShopifyImage(excursion.images[currentImageIndex], 800)}
                                     alt={excursion.title}
                                     className="w-full h-full object-cover"
                                 />
@@ -318,8 +319,8 @@ export default function ItemDetailpage() {
                                             : 'border-amber-200 opacity-60 hover:opacity-100 hover:border-amber-400'
                                             } transition-all`}
                                     >
-                                        <LazyImage
-                                            src={image}
+                                        <LazyLoadImage
+                                            src={optimizeShopifyImage(image, 200)}
                                             alt={`Thumbnail ${index + 1}`}
                                             className="w-full h-full object-cover"
                                         />
@@ -959,6 +960,6 @@ export default function ItemDetailpage() {
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
     );
 }

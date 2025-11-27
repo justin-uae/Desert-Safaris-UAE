@@ -7,6 +7,7 @@ import { CurrencySwitcher } from './CurrencySwitcher';
 import { clearOrders } from '../slices/ordersSlice';
 import Logo from '../assets/Logo.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { optimizeShopifyImage } from '../helper/optimizeImage';
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -93,7 +94,7 @@ export default function Navbar() {
                                 <LazyLoadImage
                                     loading='lazy'
                                     className="w-12 h-10 sm:w-14 sm:h-12 md:w-16 md:h-14 transform group-hover:scale-110 transition-transform duration-300"
-                                    src={Logo}
+                                    src={optimizeShopifyImage(Logo, 40)}
                                     alt="Desert Safaris UAE Logo"
                                 />
                             </div>
@@ -146,6 +147,7 @@ export default function Navbar() {
                             </div>
                             <Link
                                 to="/cart"
+                                aria-label="Go to cart"
                                 className="relative p-2.5 hover:bg-amber-50 rounded-full transition-colors group"
                             >
                                 <ShoppingCart className="w-6 h-6 text-gray-700 group-hover:text-amber-600 transition-colors" />

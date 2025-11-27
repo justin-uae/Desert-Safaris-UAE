@@ -6,6 +6,7 @@ import { fetchAllExcursions } from '../slices/productsSlice';
 import { PopularToursSkeletonLoader } from './Skeletons/PopularToursSkeletonLoader';
 import { useCurrency } from '../hooks/useCurrency';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { optimizeShopifyImage } from '../helper/optimizeImage';
 
 export default function PopularTours() {
     const navigate = useNavigate();
@@ -94,7 +95,7 @@ export default function PopularTours() {
                                 {/* Image */}
                                 <div className="relative h-52 sm:h-56 md:h-60 lg:h-64 overflow-hidden bg-gradient-to-br from-amber-100 to-orange-100">
                                     <LazyLoadImage
-                                        src={tour.images[0]}
+                                        src={optimizeShopifyImage(tour.images[0], 400)}
                                         alt={tour.title}
                                         className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
                                         loading="lazy"

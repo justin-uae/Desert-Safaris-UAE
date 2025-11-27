@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { LazyImage } from "./LazyImage";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useCurrency } from "../hooks/useCurrency";
 import { MapPin, Clock, Users, MessageCircle, Star, Sparkles, ArrowRight } from 'lucide-react';
+import { optimizeShopifyImage } from "../helper/optimizeImage";
 
 interface Product {
     id: string;
@@ -35,8 +36,8 @@ export const ExcursionCard = ({ excursion }: { excursion: Product }) => {
         >
             {/* Image Container */}
             <div className="relative h-64 overflow-hidden bg-gradient-to-br from-amber-100 to-orange-100">
-                <LazyImage
-                    src={`${excursion.images[0]}?width=400&height=300&crop=center`}
+                <LazyLoadImage
+                    src={optimizeShopifyImage(excursion.images[0], 400)}
                     alt={excursion.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
