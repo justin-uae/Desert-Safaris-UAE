@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Mail, Phone, MapPin, Send, Sparkles, Clock, CheckCircle } from 'lucide-react';
-import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 function ContactForm() {
+    const recaptchaRef = useRef<ReCAPTCHA>(null);
     const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [responseMessage, setResponseMessage] = useState('');
     const [formData, setFormData] = useState({
@@ -10,8 +11,6 @@ function ContactForm() {
         email: '',
         message: ''
     });
-
-    const { executeRecaptcha } = useGoogleReCaptcha();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
@@ -23,9 +22,12 @@ function ContactForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!executeRecaptcha) {
+        // Get reCAPTCHA token
+        const recaptchaToken = recaptchaRef.current?.getValue();
+
+        if (!recaptchaToken) {
             setFormStatus('error');
-            setResponseMessage('reCAPTCHA not loaded. Please refresh the page.');
+            setResponseMessage('Please complete the reCAPTCHA verification.');
             return;
         }
 
@@ -33,42 +35,42 @@ function ContactForm() {
         setResponseMessage('');
 
         try {
-            // Execute reCAPTCHA v3 (invisible)
-            const recaptchaToken = await executeRecaptcha('contact_form');
-
-            console.log('reCAPTCHA token generated');
-
-            // Send form data with reCAPTCHA token
-            const response = await fetch('https://www.excursionsdubai.ae/contact-handler.php', {
+            // Send form data to PHP backend
+            const response = await fetch('https://www.safaris.ae/api/contact.php', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     ...formData,
-                    recaptchaToken
+                    recaptchaToken: recaptchaToken
                 })
             });
 
-            const data = await response.json();
+            const result = await response.json();
 
-            if (response.ok) {
+            if (result.success) {
                 setFormStatus('success');
-                setResponseMessage(data.message || 'Your message has been sent successfully!');
-                setFormData({ name: '', email: '', message: '' });
-
-                setTimeout(() => {
-                    setFormStatus('idle');
-                    setResponseMessage('');
-                }, 5000);
+                setResponseMessage(result.message || 'Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.');
+                // Reset form
+                setFormData({
+                    name: '',
+                    email: '',
+                    message: ''
+                });
+                // Reset reCAPTCHA
+                recaptchaRef.current?.reset();
             } else {
                 setFormStatus('error');
-                setResponseMessage(data.message || 'Something went wrong. Please try again.');
+                setResponseMessage(result.message || 'Something went wrong. Please try again or contact us directly.');
+                // Reset reCAPTCHA on error
+                recaptchaRef.current?.reset();
             }
         } catch (error) {
-            console.error('Form submission error:', error);
+            console.error('Error submitting form:', error);
             setFormStatus('error');
             setResponseMessage('Network error. Please check your connection and try again.');
+            recaptchaRef.current?.reset();
         }
     };
 
@@ -149,6 +151,15 @@ function ContactForm() {
                                 />
                             </div>
 
+                            {/* reCAPTCHA v2 */}
+                            <div className="flex justify-center">
+                                <ReCAPTCHA
+                                    ref={recaptchaRef}
+                                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                                    theme="light"
+                                />
+                            </div>
+
                             <button
                                 type="submit"
                                 disabled={formStatus === 'loading'}
@@ -167,7 +178,7 @@ function ContactForm() {
                                 )}
                             </button>
 
-                            {/* reCAPTCHA v3 Badge Notice */}
+                            {/* reCAPTCHA Notice */}
                             <p className="text-xs text-gray-500 text-center font-medium">
                                 This site is protected by reCAPTCHA and the Google{' '}
                                 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-amber-600 hover:text-amber-700 font-bold">
@@ -310,11 +321,4 @@ function ContactForm() {
     );
 }
 
-// Wrap with GoogleReCaptchaProvider
-export default function ContactUsPage() {
-    return (
-        <GoogleReCaptchaProvider reCaptchaKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}>
-            <ContactForm />
-        </GoogleReCaptchaProvider>
-    );
-}
+export default ContactForm;
