@@ -93,7 +93,7 @@ export default function Navbar() {
                             <div className="flex-shrink-0">
                                 <LazyLoadImage
                                     loading='lazy'
-                                    className="w-12 h-10 sm:w-14 sm:h-12 md:w-16 md:h-14 transform group-hover:scale-110 transition-transform duration-300"
+                                    className="w-12 h-12 sm:w-14 sm:h-12 md:w-18 md:h-18 transform group-hover:scale-110 transition-transform duration-300"
                                     src={optimizeShopifyImage(Logo, 40)}
                                     alt="Desert Safaris UAE Logo"
                                 />

@@ -54,7 +54,7 @@ export default function RegisterPage() {
                             <LazyLoadImage
                                 loading='lazy'
                                 src={Logo}
-                                className="w-20 h-18 transform hover:scale-110 transition-transform duration-300"
+                                className="w-20 h-20 transform hover:scale-110 transition-transform duration-300"
                                 alt="Desert Safaris UAE"
                             />
                             <div className="absolute -inset-2 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full blur opacity-25"></div>
