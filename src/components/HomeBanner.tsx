@@ -129,20 +129,55 @@ export default function HomepageBanner() {
             navigate(`/safaris?location=${encodeURIComponent(selectedLocation)}`);
         }
     }, [selectedLocation, navigate])
+    const sortLocationsByPriority = (items: any[], getLocation: (item: any) => string) => {
+        return [...items].sort((a: any, b: any) => {
+            const locationA = getLocation(a)?.toLowerCase() || '';
+            const locationB = getLocation(b)?.toLowerCase() || '';
+
+            // Dubai comes first
+            if (locationA === 'dubai') return -1;
+            if (locationB === 'dubai') return 1;
+
+            // Abu Dhabi comes second
+            if (locationA === 'abu dhabi') return -1;
+            if (locationB === 'abu dhabi') return 1;
+
+            // Rest alphabetically
+            return getLocation(a).localeCompare(getLocation(b));
+        });
+    };
+
 
     // Get best cities to visit collection
     const bestCitiesCollection = collectionsWithProducts.find(
         (col: any) => col.handle === 'best-cities-to-visit'
     );
 
-    const bestCitiesToVisit = bestCitiesCollection?.products || [];
+    const bestCitiesToVisit = sortLocationsByPriority(
+        bestCitiesCollection?.products || [],
+        (city) => city?.location || ''
+    );
 
     // Get unique locations for dropdown
     const uniqueLocations = [
         ...new Map(
             bestCitiesToVisit?.map((city: any) => [city?.location, city])
         ).values(),
-    ];
+    ].sort((a: any, b: any) => {
+        const locationA = a?.location?.toLowerCase() || '';
+        const locationB = b?.location?.toLowerCase() || '';
+
+        // Dubai comes first
+        if (locationA === 'dubai') return -1;
+        if (locationB === 'dubai') return 1;
+
+        // Abu Dhabi comes second
+        if (locationA === 'abu dhabi') return -1;
+        if (locationB === 'abu dhabi') return 1;
+
+        // Rest alphabetically
+        return (a?.location || '').localeCompare(b?.location || '');
+    });
 
     // Scroll Functionality
     const scroll = (direction: 'left' | 'right') => {

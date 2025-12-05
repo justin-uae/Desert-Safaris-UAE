@@ -64,16 +64,10 @@ export const CartPageComplete: React.FC = () => {
         }, 0);
     }, [items, convertPrice]);
 
-    const tax = useMemo(() => totalPrice * 0.05, [totalPrice]);
-    const finalTotal = useMemo(() => totalPrice + tax, [totalPrice, tax]);
-
     // Calculate AED totals for order submission
     const totalPriceAED = useMemo(() => {
         return items.reduce((sum, item) => sum + item.price * item.quantity, 0);
     }, [items]);
-
-    const taxAED = useMemo(() => totalPriceAED * 0.05, [totalPriceAED]);
-    const finalTotalAED = useMemo(() => totalPriceAED + taxAED, [totalPriceAED, taxAED]);
 
     const handleRemoveItem = (variantId: string) => {
         dispatch(removeFromCart(variantId));
@@ -379,23 +373,15 @@ export const CartPageComplete: React.FC = () => {
                                 <h3 className="text-2xl font-black text-gray-900 mb-6 text-center">Order Summary</h3>
 
                                 <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 space-y-3 border-2 border-amber-200 mb-6">
-                                    <div className="flex justify-between text-gray-700 font-medium">
-                                        <span>Subtotal</span>
-                                        <span>{selectedCurrency?.symbol}{totalPrice.toFixed(2)}</span>
-                                    </div>
-                                    <div className="flex justify-between text-gray-700 font-medium">
-                                        <span>VAT (5%)</span>
-                                        <span>{selectedCurrency?.symbol}{tax.toFixed(2)}</span>
-                                    </div>
-                                    <div className="border-t-2 border-amber-300 pt-3 flex justify-between items-center">
+                                    <div className="flex justify-between items-center">
                                         <span className="text-lg font-black text-gray-900">Total</span>
                                         <span className="text-2xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-                                            {selectedCurrency?.symbol}{finalTotal.toFixed(2)}
+                                            {selectedCurrency?.symbol}{totalPrice.toFixed(2)}
                                         </span>
                                     </div>
                                     {selectedCurrency.code !== 'AED' && (
                                         <div className="text-xs text-gray-600 text-center pt-2 border-t border-amber-200 font-medium">
-                                            ≈ AED {finalTotalAED.toFixed(2)} at checkout
+                                            ≈ AED {totalPriceAED.toFixed(2)} at checkout
                                         </div>
                                     )}
                                 </div>
@@ -697,24 +683,16 @@ export const CartPageComplete: React.FC = () => {
                                 ))}
                             </div>
 
-                            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 space-y-3 border-2 border-amber-200">
-                                <div className="flex justify-between text-gray-700 font-medium">
-                                    <span>Subtotal</span>
-                                    <span>{selectedCurrency?.symbol}{totalPrice.toFixed(2)}</span>
-                                </div>
-                                <div className="flex justify-between text-gray-700 font-medium">
-                                    <span>VAT (5%)</span>
-                                    <span>{selectedCurrency?.symbol}{tax.toFixed(2)}</span>
-                                </div>
-                                <div className="border-t-2 border-amber-300 pt-3 flex justify-between items-center">
+                            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border-2 border-amber-200">
+                                <div className="flex justify-between items-center">
                                     <span className="text-lg font-black text-gray-900">Total</span>
                                     <span className="text-2xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-                                        {selectedCurrency?.symbol}{finalTotal.toFixed(2)}
+                                        {selectedCurrency?.symbol}{totalPrice.toFixed(2)}
                                     </span>
                                 </div>
                                 {selectedCurrency.code !== 'AED' && (
-                                    <div className="text-xs text-gray-600 text-center pt-2 border-t border-amber-200 font-medium">
-                                        You'll pay AED {finalTotalAED.toFixed(2)}
+                                    <div className="text-xs text-gray-600 text-center pt-2 mt-2 border-t border-amber-200 font-medium">
+                                        You'll pay AED {totalPriceAED.toFixed(2)}
                                     </div>
                                 )}
                             </div>

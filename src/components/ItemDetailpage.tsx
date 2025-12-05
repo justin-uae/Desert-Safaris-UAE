@@ -28,7 +28,7 @@ export default function ItemDetailpage() {
     };
 
     const [selectedDate, setSelectedDate] = useState(getTodayDate());
-    const [adults, setAdults] = useState(2);
+    const [adults, setAdults] = useState(1);
     const [children, setChildren] = useState(0);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [addingToCart, setAddingToCart] = useState(false);

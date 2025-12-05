@@ -34,7 +34,7 @@ const ViewAllExcursion = () => {
     // Filter states
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedLocation, setSelectedLocation] = useState(locationFromQuery);
-    const [sortBy, setSortBy] = useState('rating');
+    const [sortBy, setSortBy] = useState('price-low');
 
     // Get unique locations from safaris
     const uniqueLocations = Array.from(
@@ -42,7 +42,18 @@ const ViewAllExcursion = () => {
     ).map((location) => ({
         value: location,
         label: location,
-    }));
+    })).sort((a, b) => {
+        // Dubai comes first
+        if (a.value.toLowerCase() === 'dubai') return -1;
+        if (b.value.toLowerCase() === 'dubai') return 1;
+
+        // Abu Dhabi comes second
+        if (a.value.toLowerCase() === 'abu dhabi') return -1;
+        if (b.value.toLowerCase() === 'abu dhabi') return 1;
+
+        // Rest alphabetically
+        return a.value.localeCompare(b.value);
+    });
 
     // Fetch safaris on mount
     useEffect(() => {
@@ -91,7 +102,7 @@ const ViewAllExcursion = () => {
     const clearFilters = () => {
         setSearchQuery('');
         setSelectedLocation('');
-        setSortBy('rating');
+        setSortBy('price-low');
         navigate('/safaris');
     };
 
@@ -240,23 +251,21 @@ const ViewAllExcursion = () => {
     );
 };
 
-// Hero Section Component
 const HeroSection = ({ searchQuery, setSearchQuery, totalCount, selectedLocation }: any) => (
-    <div className="relative bg-gradient-to-br from-amber-600 via-orange-600 to-amber-700 text-white py-16 md:py-20 overflow-hidden">
-        {/* Decorative Background Elements */}
-        <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-10 left-10 w-40 h-40 bg-white rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-10 right-10 w-56 h-56 bg-white rounded-full blur-3xl animate-pulse delay-700"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white rounded-full blur-3xl animate-pulse delay-1000"></div>
+    <div className="relative bg-gradient-to-br from-amber-600 via-orange-600 to-amber-700 text-white overflow-hidden min-h-[200px] sm:min-h-[250px] md:min-h-[150px] lg:min-h-[150px]">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+            <img
+                src="https://cdn.shopify.com/s/files/1/0762/5008/7481/files/bearded-atv-racer-desert-sands-on-background-2024-11-26-23-52-00-utc.jpg?v=1763968428"
+                alt="Desert Safari"
+                className="w-full h-full object-cover object-center"
+            />
+            {/* Dark Overlay for better text readability */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-black/30"></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 text-center">
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4 border border-white/30">
-                <Sparkles className="w-4 h-4" />
-                <span className="text-sm font-bold uppercase tracking-wider">Premium Desert Experiences</span>
-            </div>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 drop-shadow-lg">
+        <div className="relative max-w-7xl mx-auto px-4 text-center z-10 flex flex-col justify-center min-h-[350px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-3 sm:mb-4 drop-shadow-2xl">
                 {selectedLocation ? (
                     <>
                         Discover <span className="text-amber-200">{selectedLocation}</span>
@@ -267,26 +276,26 @@ const HeroSection = ({ searchQuery, setSearchQuery, totalCount, selectedLocation
                     </>
                 )}
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-white/95 mb-8 font-medium drop-shadow max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 mb-6 sm:mb-8 font-medium drop-shadow-lg max-w-3xl mx-auto">
                 Explore {totalCount}+ unforgettable desert experiences across the UAE
             </p>
 
-            <div className="max-w-2xl mx-auto">
+            <div className="max-w-2xl mx-auto w-full">
                 <div className="relative group">
-                    <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 md:w-6 md:h-6 text-gray-400 group-focus-within:text-amber-600 transition-colors" />
+                    <Search className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 w-5 h-5 md:w-6 md:h-6 text-gray-400 group-focus-within:text-amber-600 transition-colors z-10" />
                     <input
                         type="text"
                         placeholder="Search safaris, activities, destinations..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full pl-14 md:pl-16 pr-6 py-4 md:py-5 rounded-2xl text-gray-800 text-base md:text-lg focus:outline-none focus:ring-4 focus:ring-amber-300 shadow-2xl font-medium border-2 border-transparent focus:border-amber-300 transition-all"
+                        className="relative w-full pl-12 sm:pl-14 md:pl-16 pr-12 sm:pr-14 py-3 sm:py-4 md:py-5 rounded-xl sm:rounded-2xl bg-white text-gray-800 text-sm sm:text-base md:text-lg focus:outline-none focus:ring-4 focus:ring-amber-300 shadow-2xl font-medium border-2 border-transparent focus:border-amber-300 transition-all"
                     />
                     {searchQuery && (
                         <button
                             onClick={() => setSearchQuery('')}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+                            className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 p-1.5 hover:bg-gray-100 rounded-full transition-colors z-10"
                         >
-                            <X className="w-5 h-5 text-gray-500" />
+                            <X className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
                         </button>
                     )}
                 </div>
@@ -294,7 +303,6 @@ const HeroSection = ({ searchQuery, setSearchQuery, totalCount, selectedLocation
         </div>
     </div>
 );
-
 // Filter Sidebar Component
 const FilterSidebar = ({
     uniqueLocations,
@@ -321,8 +329,8 @@ const FilterSidebar = ({
             <button
                 onClick={() => setSelectedLocation('')}
                 className={`group flex items-center gap-2 w-full text-left px-3 py-2.5 rounded-xl transition-all font-medium ${!selectedLocation
-                        ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md'
-                        : 'hover:bg-amber-50 text-gray-700'
+                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md'
+                    : 'hover:bg-amber-50 text-gray-700'
                     }`}
             >
                 <MapPin className={`w-4 h-4 ${!selectedLocation ? 'text-white' : 'text-amber-600'}`} />
@@ -333,8 +341,8 @@ const FilterSidebar = ({
                     key={location.value}
                     onClick={() => setSelectedLocation(location.value)}
                     className={`group flex items-center gap-2 w-full text-left px-3 py-2.5 rounded-xl transition-all font-medium ${selectedLocation === location.value
-                            ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md'
-                            : 'hover:bg-amber-50 text-gray-700'
+                        ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md'
+                        : 'hover:bg-amber-50 text-gray-700'
                         }`}
                 >
                     <MapPin className={`w-4 h-4 ${selectedLocation === location.value ? 'text-white' : 'text-amber-600'}`} />
